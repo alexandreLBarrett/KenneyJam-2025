@@ -9,17 +9,13 @@ public class CarStats : ScriptableObject
     public float brakeForce = 20f;
     public float reverseForce = 7.5f;
     public float turnTorque = 1700f;
-    public float maxTurnSpeed = 1500f;
+    public float maxTurnSpeed = 1250f;
 
     [Header("Physics")]
+    public float mass = 1000f;
     public float linearDamping = 5f;
-    public float downforce = 10f;
+    public float angularDamping = 1.0f;
 
     [Header("Visual/Audio")]
     public string carName = "Default Car";
-
-    [Header("Advanced")]
-    [Range(0.1f, 2f)]
-    public float grip = 1f;
-    public float mass = 1000f;
 }

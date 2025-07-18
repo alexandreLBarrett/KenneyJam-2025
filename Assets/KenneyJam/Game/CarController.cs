@@ -1,19 +1,15 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CarController : MonoBehaviour
 {
     public CarStats stats;
 
     private Rigidbody rb;
-    private InputAction moveAction;
     private float currentSpeed;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        moveAction = InputSystem.actions.FindAction("Move");
 
         // Fallback to default
         if (stats == null)
@@ -23,7 +19,6 @@ public class CarController : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         InitializePhysicsWithStats();
@@ -34,40 +29,39 @@ public class CarController : MonoBehaviour
         rb.automaticCenterOfMass = true;
         rb.mass = stats.mass;
         rb.linearDamping = stats.linearDamping;
+        rb.angularDamping = stats.angularDamping;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateMovement(float engineInput, float steeringInput)
     {
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
-
         currentSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
         
         // Accelerate
-        if (currentSpeed < stats.maxSpeed && moveValue.y > 0.001f)
+        if (currentSpeed < stats.maxSpeed && engineInput > 0.001f)
         {
-            rb.AddForce(moveValue.y * stats.acceleration * transform.forward, ForceMode.Acceleration);
+            rb.AddForce(engineInput * stats.acceleration * transform.forward, ForceMode.Acceleration);
         }
         // Brake
-        else if (currentSpeed > 0 && moveValue.y < -0.001f)
+        else if (currentSpeed > 0 && engineInput < -0.001f)
         {
-            rb.AddForce(moveValue.y * stats.brakeForce * transform.forward, ForceMode.Acceleration);
+            rb.AddForce(engineInput * stats.brakeForce * transform.forward, ForceMode.Acceleration);
         }
         // Reverse
-        else if (moveValue.y < -0.001f)
+        else if (engineInput < -0.001f)
         {
-            rb.AddForce(moveValue.y * stats.reverseForce * transform.forward, ForceMode.Acceleration);
+            rb.AddForce(engineInput * stats.reverseForce * transform.forward, ForceMode.Acceleration);
         }
 
         // Steering
-        if (currentSpeed > 0.001f && Mathf.Abs(moveValue.x) > 0.1f)
+        if (Mathf.Abs(currentSpeed) > 0.001f && Mathf.Abs(steeringInput) > 0.1f)
         {
-            float turnForce = moveValue.x * stats.turnTorque;
+            float turnForce = steeringInput * stats.turnTorque;
             float speedFactor = Mathf.Clamp01(1f - (Mathf.Abs(currentSpeed) / stats.maxSpeed * 0.5f));
             turnForce *= speedFactor;
 
             // Stop turning too fast.
-            turnForce = Mathf.Sign(moveValue.x) * Mathf.Clamp(Mathf.Abs(turnForce), 0f, stats.maxTurnSpeed);
+            turnForce = Mathf.Sign(steeringInput) * Mathf.Clamp(Mathf.Abs(turnForce), 0f, stats.maxTurnSpeed);
+            turnForce *= Mathf.Sign(currentSpeed);
 
             rb.AddTorque(0, turnForce, 0, ForceMode.Force);
         }
