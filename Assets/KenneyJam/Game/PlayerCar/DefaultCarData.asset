@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partPrefabs:
   - moduleSlot: 0
-    gameObject: {fileID: 4238420060159345081, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
+    gameObject: {fileID: 5506270998500815419, guid: f1e8350ac1c23b6489b4bcf5be508b55, type: 3}
   - moduleSlot: 1
     gameObject: {fileID: 4238420060159345081, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
   - moduleSlot: 2

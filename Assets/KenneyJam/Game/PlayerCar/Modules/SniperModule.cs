@@ -1,4 +1,6 @@
-﻿namespace KenneyJam.Game.PlayerCar.Modules
+﻿using UnityEngine;
+
+namespace KenneyJam.Game.PlayerCar.Modules
 {
     public class SniperModule : CarModule
     {
@@ -9,7 +11,7 @@
 
         public override void Activate()
         {
-            
+            //Physics.Raycast()
         }
     }
 }

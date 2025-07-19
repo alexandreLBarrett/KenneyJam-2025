@@ -10,7 +10,7 @@ public class PlayerCarController : MonoBehaviour
     void Awake()
     {
         moveAction = InputSystem.actions.FindAction("Move");
-        carController = GetComponent<CarController>();
+        carController = GetComponentInChildren<CarController>();
     }
 
     void Update()

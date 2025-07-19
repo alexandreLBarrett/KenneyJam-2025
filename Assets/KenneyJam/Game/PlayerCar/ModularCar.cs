@@ -19,7 +19,7 @@ namespace KenneyJam.Game.PlayerCar
     {
         public CarModuleSlot moduleSlot;
         public GameObject gameObject;
-    } 
+    }
     
     public class ModularCar : MonoBehaviour
     {
