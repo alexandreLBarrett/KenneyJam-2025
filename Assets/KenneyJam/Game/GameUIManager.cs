@@ -4,12 +4,12 @@ using UnityEngine.UIElements;
 
 public class GameUIManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject healthPoints;
-    [SerializeField]
-    private TextMeshProUGUI victoriesText;
-    [SerializeField]
-    private CarController controller;
+    public GameObject healthPoints;
+    public TextMeshProUGUI victoriesText;
+    public CarController controller;
+    public GameObject livesRemaining1;
+    public GameObject livesRemaining2;
+    public GameObject livesRemaining3;
 
     void Start()
     {
@@ -19,6 +19,9 @@ public class GameUIManager : MonoBehaviour
     {
         this.controller = controller;
         controller.onHealthChanged.AddListener(OnHealthChangedCallback);
+        livesRemaining1.SetActive(CarSceneManager.Instance.PlayerLives >= 1);
+        livesRemaining1.SetActive(CarSceneManager.Instance.PlayerLives >= 2);
+        livesRemaining1.SetActive(CarSceneManager.Instance.PlayerLives >= 3);
     }
 
     void OnHealthChangedCallback(float health, float maxHealth)

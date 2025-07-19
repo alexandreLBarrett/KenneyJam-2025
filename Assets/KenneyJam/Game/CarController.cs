@@ -33,6 +33,14 @@ public class CarController : MonoBehaviour
         }
     }
 
+    public static Vector3 RandomVector3(float min = -1f, float max = 1f)
+    {
+        float x = Random.Range(min, max);
+        float y = Random.Range(min, max);
+        float z = Random.Range(min, max);
+        return new Vector3(x, y, z);
+    }
+
     void Start()
     {
         InitializePhysicsWithStats();
@@ -44,6 +52,7 @@ public class CarController : MonoBehaviour
             {
                 SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.CarBreak);
                 rb.AddForce(((transform.position - damageDealer.transform.position).normalized + Vector3.up) * 50000, ForceMode.Impulse);
+                rb.AddTorque(RandomVector3() * 20000, ForceMode.Impulse);
             }
             else
             {
