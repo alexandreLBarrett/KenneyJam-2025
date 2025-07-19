@@ -32,12 +32,17 @@ public class AICarController : MonoBehaviour
     private float[] moduleRawCooldown = new float[5];
 
     private bool isTeabaging;
+    private float hostilityGracePeriod;
+
+    private float timeWithoutMoving = 0;
+    private Vector3 previousPosition;
 
     void Start()
     {
         controller = GetComponent<CarController>();
         modularCar = GetComponent<ModularCar>();
         isTeabaging = Random.Range(0, 2) == 0;
+        hostilityGracePeriod = Random.Range(2f, 4f);
     }
 
     void OnDrawGizmos()
@@ -58,6 +63,8 @@ public class AICarController : MonoBehaviour
     void FixedUpdate()
     {
         if (controller.currentHealth <= 0) return;
+
+        float maxSpeed = Mathf.Min(Time.timeSinceLevelLoad*.4f, 1f);
 
         CarController? target = GetTarget();
         if (target == null)
@@ -97,7 +104,7 @@ public class AICarController : MonoBehaviour
                     float engine = dy < .3f ? -1f : 1f;
                     engine = Mathf.Min(Mathf.Sqrt(1 - steering * steering), Mathf.Abs(engine)) * Mathf.Sign(engine);
                     if (engine < 0) steering *= -1;
-                    controller.UpdateMovement(engine, steering);
+                    controller.UpdateMovement(engine * maxSpeed, steering * maxSpeed);
                     _Debug = new(dx, engine, steering);
                     break;
                 }
@@ -117,7 +124,7 @@ public class AICarController : MonoBehaviour
                     float engine = dy > 0 ? 1f : -1f;
                     engine = Mathf.Min(Mathf.Sqrt(1 - steering * steering), Mathf.Abs(engine)) * Mathf.Sign(engine);
                     if (engine < 0) steering *= -1;
-                    controller.UpdateMovement(engine, steering);
+                    controller.UpdateMovement(engine * maxSpeed, steering * maxSpeed);
                     _Debug = new(dx, engine, steering);
                     break;
                 }
@@ -129,7 +136,7 @@ public class AICarController : MonoBehaviour
                     float engine = offset.magnitude - engineControl;
                     engine = Mathf.Min(Mathf.Sqrt(1 - steering * steering), Mathf.Abs(engine)) * Mathf.Sign(engine);
                     if (engine < 0) steering *= -1;
-                    controller.UpdateMovement(engine, steering);
+                    controller.UpdateMovement(engine * maxSpeed, steering * maxSpeed);
                     _Debug = new(dx, engine, steering);
                     break;
                 }
@@ -145,12 +152,30 @@ public class AICarController : MonoBehaviour
                     steering *= Mathf.Sign(engine);
                     Vector2 v = new(steering, engine);
                     v.Normalize();
-                    controller.UpdateMovement(v.y, v.x);
+                    controller.UpdateMovement(v.y * maxSpeed, v.x * maxSpeed);
                     _Debug = new(dx, dy, steering);
                     break;
                 }
         }
 
+        if (Vector3.Distance(previousPosition, transform.position) < .2f)
+        {
+            timeWithoutMoving += Time.fixedDeltaTime * (Vector3.Dot(transform.up, Vector3.up) < .5f ? 5 : 1);
+            if (timeWithoutMoving > 6f)
+            {
+                timeWithoutMoving = 0;
+                controller.Panick();
+            }
+        }
+        else
+        {
+            timeWithoutMoving = 0;
+            previousPosition = transform.position;
+        }
+
+        // Fire guns
+        if (Time.timeSinceLevelLoad < hostilityGracePeriod)
+            return;
         for (CarModuleSlot slot = 0; slot < (CarModuleSlot)5; slot++)
         {
             CarModule module = modularCar.GetModuleInSlot(slot);

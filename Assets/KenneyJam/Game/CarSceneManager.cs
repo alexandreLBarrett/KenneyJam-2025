@@ -7,7 +7,7 @@ public class CarSceneManager : MonoBehaviour
 {
     public string menuScene = "MainMenuScene";
     public string garageScene = "GarageScene";
-    public string gameScene = "GameScene";
+    public string gameScene = "MainScene";
     public float transitionDuration = .8f;
 
     public int PlayerLives = 3;

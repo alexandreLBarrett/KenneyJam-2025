@@ -11,7 +11,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
         public Transform muzzle;
 
         public GameObject flamesPrefab;
-        public float flamesSFXVolume = 0.6f;
+        public float flamesSFXVolume = 0.2f;
         public AudioClip flamesSFXLooped;
 
         private BoxCollider boxCollider;

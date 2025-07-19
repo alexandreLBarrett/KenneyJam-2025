@@ -8,6 +8,8 @@ namespace KenneyJam.Game.PlayerCar.Modules
         public GameObject laserVFXPrefab;
         public float damage = 1;
         public float cooldown = 1f;
+        public AudioClip sfx;
+        public float volume = .2f;
 
         public override float Cooldown => cooldown;
 
@@ -24,7 +26,8 @@ namespace KenneyJam.Game.PlayerCar.Modules
             {
                 return;
             }
-
+            SoundManager.Instance.PlayInstantSound(sfx, volume);
+            currentCooldown = cooldown;
             Transform muzzleTransform = muzzle.transform;
             RaycastHit hit;
             if (Physics.Raycast(muzzleTransform.position, muzzleTransform.forward, out hit, 10000.0f))

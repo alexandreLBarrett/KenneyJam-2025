@@ -20,6 +20,9 @@ public class CarController : MonoBehaviour
     private float lerpedEngineVolume = .05f;
     private ModularCar modularCar;
 
+    private float panickDuration = 0;
+    private Quaternion panickRotation;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -90,6 +93,10 @@ public class CarController : MonoBehaviour
             stats.engineVolumeLerp);
         engineAudioSource.volume = lerpedEngineVolume * stats.engineGlobalVolume;
         engineAudioSource.pitch = 1 + lerpedEngineVolume * .3f - .15f;
+
+        if (panickDuration > 0)
+            transform.rotation = Quaternion.Lerp(transform.rotation, panickRotation, .05f);
+        panickDuration -= Time.deltaTime;
     }
 
     private void OnDestroy()
@@ -167,5 +174,18 @@ public class CarController : MonoBehaviour
     {
         // TODO play sound
         //Debug.Log(collision.gameObject.name + " " + collision.impulse + " " + collision.relativeVelocity);
+    }
+
+
+    internal void Panick()
+    {
+        if (currentHealth <= 0) return;
+        InflictDamage(this, 1.5f);
+        rb.AddForce(Vector3.up * stats.panickImpulseForce, ForceMode.Force);
+        panickRotation = transform.rotation;
+        Vector3 euler = panickRotation.eulerAngles;
+        euler.x = euler.z = 0;
+        panickRotation.eulerAngles = euler;
+        panickDuration = .5f;
     }
 }

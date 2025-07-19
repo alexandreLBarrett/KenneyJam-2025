@@ -54,6 +54,9 @@ public class PlayerCarController : MonoBehaviour
 
     void OnButtonPressed(int buttonIndex)
     {
-        modularCar.ActivateModule((CarModuleSlot) buttonIndex);
+        if (buttonIndex == 5)
+            carController.Panick();
+        else
+            modularCar.ActivateModule((CarModuleSlot) buttonIndex);
     }
 }
