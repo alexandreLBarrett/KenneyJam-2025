@@ -10,10 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac1cc12be7a74669af55079e19384809, type: 3}
-  m_Name: DefaultCarData
+  m_Name: BotPreset1 1
   m_EditorClassIdentifier: 
   moduleDesc:
-  - moduleSlot: 0
+  - moduleSlot: 3
     type: 2
     level: 0
-  frame: {fileID: 8066831284391393388, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}
+  - moduleSlot: 2
+    type: 2
+    level: 1
+  frame: {fileID: 6851604215783760965, guid: 7c46a875ee2106f4b857f34b2d709712, type: 3}

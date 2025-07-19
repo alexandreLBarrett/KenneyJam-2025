@@ -6,6 +6,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
     {
         public Transform muzzle;
         public GameObject laserVFXPrefab;
+        public float damage = 1;
 
         public override Type GetModuleType()
         {
@@ -15,15 +16,17 @@ namespace KenneyJam.Game.PlayerCar.Modules
         public override void Activate()
         {
             Transform muzzleTransform = muzzle.transform;
-            RailgunLaser laser = Instantiate(laserVFXPrefab, muzzleTransform).GetComponent<RailgunLaser>();
-            if (Physics.Raycast(muzzleTransform.position, muzzleTransform.forward, out RaycastHit hit, 10000.0f))
+            RaycastHit hit;
+            if (Physics.Raycast(muzzleTransform.position, muzzleTransform.forward, out hit, 10000.0f))
             {
                 Debug.Log("An hit was registered on " + hit.collider.gameObject.name + ".");
                 if (hit.collider.CompareTag("Car"))
                 {
-                    Debug.Log("An actual hit was registered on " + hit.collider.gameObject.name + "!");
+                    hit.collider.GetComponentInParent<CarController>().InflictDamage(damage);
                 }
             }
+            RailgunLaser laser = Instantiate(laserVFXPrefab, muzzleTransform).GetComponent<RailgunLaser>();
+            laser.SetupVFXPosition(hit.point);
         }
     }
 }

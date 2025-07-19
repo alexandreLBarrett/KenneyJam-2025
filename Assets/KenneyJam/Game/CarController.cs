@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,9 +8,10 @@ public class CarController : MonoBehaviour
 
     private Rigidbody rb;
     private float currentSpeed;
+    private float currentHealth;
 
-    private float carHealth;
-
+    public UnityEvent<Transform /* carTransform */> onCarDeath;
+    public UnityEvent<float /* damage */, CarController /* car */> onDamageTaken;
     public UnityEvent<float/*health*/, float/*maxHealth*/> onHealthChanged;
 
     private AudioSource engineAudioSource;
@@ -31,16 +33,23 @@ public class CarController : MonoBehaviour
     {
         InitializePhysicsWithStats();
 
-        carHealth = stats.maxHealth;
         engineAudioSource = SoundManager.Instance.CreatePermanentAudioSource(SoundManager.Instance.soundBank.engineSound);
+        currentHealth = stats.maxHealth;
     }
 
     private void InitializePhysicsWithStats()
     {
-        rb.automaticCenterOfMass = true;
+        //rb.automaticCenterOfMass = true;
         rb.mass = stats.mass;
         rb.linearDamping = stats.linearDamping;
         rb.angularDamping = stats.angularDamping;
+    }
+    float Smoothstep(float edge0, float edge1, float x)
+    {
+        // Scale, and clamp x to 0..1 range
+        x = Mathf.Clamp01((x - edge0) / (edge1 - edge0));
+
+        return x * x * (3.0f - 2.0f * x);
     }
 
     private void FixedUpdate()
@@ -61,10 +70,10 @@ public class CarController : MonoBehaviour
     {
         currentSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
         
-        // Accelerate
-        if (currentSpeed < stats.maxSpeed && engineInput > 0.001f)
+        // Accelerate (when either turning or when moving forwards)
+        if (currentSpeed < stats.maxSpeed && (engineInput > 0.001f || Mathf.Abs(steeringInput) > 0.1f))
         {
-            rb.AddForce(engineInput * stats.acceleration * transform.forward, ForceMode.Acceleration);
+            rb.AddForce(Mathf.Max(Mathf.Abs(engineInput), Mathf.Abs(steeringInput)) * Mathf.Sign(engineInput) * stats.acceleration * transform.forward, ForceMode.Acceleration);
         }
         // Brake
         else if (currentSpeed > 0 && engineInput < -0.001f)
@@ -78,17 +87,31 @@ public class CarController : MonoBehaviour
         }
 
         // Steering
-        if (Mathf.Abs(currentSpeed) > 0.001f && Mathf.Abs(steeringInput) > 0.1f)
+        if (Mathf.Abs(steeringInput) > 0.1f)
         {
-            float turnForce = steeringInput * stats.turnTorque;
-            float speedFactor = Mathf.Clamp01(1f - (Mathf.Abs(currentSpeed) / stats.maxSpeed * 0.5f));
-            turnForce *= speedFactor;
+            float turnForce = Mathf.Sign(steeringInput) * stats.turningMotorCurve.Evaluate(engineInput) * stats.turnTorque;
 
-            // Stop turning too fast.
+            // Stop the car from spinning out (reduce turn force when moving slowly).
+            float speedTurnMask = Smoothstep(stats.turnSmoothingEdge1, stats.turnSmoothingEdge2, Mathf.Abs(currentSpeed) / stats.maxSpeed);
+            turnForce *= speedTurnMask;
+
+            // Clamp the turning speed to the max.
             turnForce = Mathf.Sign(steeringInput) * Mathf.Clamp(Mathf.Abs(turnForce), 0f, stats.maxTurnSpeed);
             turnForce *= Mathf.Sign(currentSpeed);
 
             rb.AddTorque(0, turnForce, 0, ForceMode.Force);
+        }
+    }
+
+    public void InflictDamage(float damageValue)
+    {
+        currentHealth -= damageValue;
+        onDamageTaken.Invoke(currentHealth, this);
+        if (currentHealth < 0)
+        {
+            onCarDeath.Invoke(transform);
+            onCarDeath.RemoveAllListeners();
+            Destroy(transform.root.gameObject);
         }
     }
 

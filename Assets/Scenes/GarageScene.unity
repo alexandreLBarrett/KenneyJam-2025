@@ -176,9 +176,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 8005f0accdc08964d95268d34e68404e, type: 2}
     - target: {fileID: 7285197490572065401, guid: 1d4e4781e516d03449b19a02a3053005, type: 3}
+      propertyPath: preset
+      value: 
+      objectReference: {fileID: 11400000, guid: e882b0022a762684e92c4e3a7a5421fe, type: 2}
+    - target: {fileID: 7285197490572065401, guid: 1d4e4781e516d03449b19a02a3053005, type: 3}
       propertyPath: defaults
       value: 
       objectReference: {fileID: 11400000, guid: 8005f0accdc08964d95268d34e68404e, type: 2}
+    - target: {fileID: 7285197490572065401, guid: 1d4e4781e516d03449b19a02a3053005, type: 3}
+      propertyPath: isPlayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

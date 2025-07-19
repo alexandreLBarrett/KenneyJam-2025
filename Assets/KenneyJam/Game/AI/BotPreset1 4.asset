@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e0bc3f684ba804d9cc97a479558e3e, type: 3}
-  m_Name: EmptyCarPreset
+  m_Script: {fileID: 11500000, guid: ac1cc12be7a74669af55079e19384809, type: 3}
+  m_Name: BotPreset1 4
   m_EditorClassIdentifier: 
-  partPrefabs: []
+  moduleDesc:
+  - moduleSlot: 0
+    type: 2
+    level: 1
+  frame: {fileID: 8066831284391393388, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}

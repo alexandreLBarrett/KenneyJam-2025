@@ -4,17 +4,20 @@ using UnityEngine;
 public class CarStats : ScriptableObject
 {
     [Header("Movement")]
-    public float acceleration = 10f;
-    public float maxSpeed = 50f;
-    public float brakeForce = 20f;
-    public float reverseForce = 7.5f;
-    public float turnTorque = 1100f;
-    public float maxTurnSpeed = 1250f;
+    public float acceleration = 2f;
+    public float maxSpeed = 10f;
+    public float brakeForce = 3f;
+    public float reverseForce = 1.5f;
+    public float turnTorque = 500f;
+    public float maxTurnSpeed = 300f;
+    public float turnSmoothingEdge1 = -0.1f;
+    public float turnSmoothingEdge2 = 0.1f;
+    public AnimationCurve turningMotorCurve;
 
     [Header("Physics")]
-    public float mass = 1000f;
+    public float mass = 2000f;
     public float linearDamping = 5f;
-    public float angularDamping = 1.0f;
+    public float angularDamping = 3f;
 
     [Header("Visual/Audio")]
     public string carName = "Default Car";

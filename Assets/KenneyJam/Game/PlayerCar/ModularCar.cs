@@ -25,65 +25,114 @@ namespace KenneyJam.Game.PlayerCar
     
     public class ModularCar : MonoBehaviour
     {
-        public static ModularCar FindCarInScene()
-        {
-            ModularCar[] modularCars = FindObjectsByType<ModularCar>(FindObjectsSortMode.None);
-            return modularCars.Length == 0 ? null : modularCars[0];
-        }
-        
-        [SerializeField]
-        private ModularCarData defaults;
+        public CarDataPreset preset;
 
         public CarModulesData modulesDB;
         
-        public CarFrame carFrame;
-
         // Runtime data on the car itself
         private Dictionary<CarModuleSlot, CarModule> modules = new();
+        private CarFrame carFrame;
+        
+        private CarFrame currentFrameInsance;
+        private PersistentCarData persistentData;
+
+        public bool isPlayer;
 
         private void Start()
         {
-            GameObject car = Instantiate(carFrame.gameObject, transform);
-            carFrame = car.GetComponent<CarFrame>();
+            bool isInitialized = false;
+            if (isPlayer)
+            {
+                persistentData = FindAnyObjectByType<PersistentCarData>();
+                if (persistentData)
+                {
+                    SetCarPreset(persistentData.carFrame, persistentData.moduleSlotData);
+                    isInitialized = true;
+                }
+                else
+                {
+                    // Initialize persistent object
+                    persistentData = PersistentCarData.GetPersistentCarData();
+                }
+            }
             
-            SpawnModules();
+            if (!isInitialized && preset)
+            {
+                SetCarPreset(preset.frame, preset.GetModuleSlotData());
+            }
         }
         
-        private void SpawnCarPart(CarSlotDescription part)
+        private void SpawnCarPart(CarModuleSlot slot, CarSlotData slotData)
         {
-            var info = modulesDB.GetModuleInfo(part.type);
+            var info = modulesDB.GetModuleInfo(slotData.type);
 
-            CarModule moduleToAttach = part.level == CarModule.Level.LVL1 ? info.lvl1Module : info.lvl2Module;
+            CarModule moduleToAttach = slotData.level == CarModule.Level.LVL1 ? info.lvl1Module : info.lvl2Module;
 
-            var slotAnchor = GetAnchorForSlot(part.moduleSlot);
+            var slotAnchor = GetAnchorForSlot(slot);
             
             GameObject moduleInstance = Instantiate(moduleToAttach.gameObject, slotAnchor.transform);
-            modules.Add(part.moduleSlot, moduleInstance.GetComponent<CarModule>());
+            modules.Add(slot, moduleInstance.GetComponent<CarModule>());
+        }
+
+        private void ResetModules()
+        {
+            foreach (var module in modules)
+            {
+                Destroy(module.Value.gameObject);
+            }
+            modules.Clear();
         }
         
-        private void SpawnModules()
+        private void SpawnModules(Dictionary<CarModuleSlot, CarSlotData> inModules)
         {
-            if (!defaults) return;
-            foreach (var desc in defaults.partPrefabs)
+            ResetModules();
+            foreach (var desc in inModules)
             {
-                SpawnCarPart(desc);    
+                SpawnCarPart(desc.Key, desc.Value);    
             }
         }
 
         public GameObject GetAnchorForSlot(CarModuleSlot slot)
         {
-            return carFrame.anchors.Find(x => x.slot == slot).anchor;
+            return currentFrameInsance.anchors.Find(x => x.slot == slot).anchor;
         }
 
-        public void SetCarModule(CarSlotDescription desc)
+        public void SetCarModule(CarModuleSlot slot, CarSlotData data)
         {
-            if (modules.TryGetValue(desc.moduleSlot, out var module))
+            if (modules.TryGetValue(slot, out var module))
             {
                 Destroy(module.gameObject);
-                modules.Remove(desc.moduleSlot);
+                modules.Remove(slot);
             }
             
-            SpawnCarPart(desc);
+            SpawnCarPart(slot, new CarSlotData{ level = data.level, type = data.type });
+        }
+
+        public void SetCarPreset(CarFrame frame, Dictionary<CarModuleSlot, CarSlotData> modules)
+        {
+            SetCarFrame(frame, false);
+            SpawnModules(modules);
+        }
+        
+        public void SetCarFrame(CarFrame frame, bool respawnModules)
+        {
+            if (currentFrameInsance)
+            {
+                Destroy(currentFrameInsance.gameObject);    
+            }
+
+            carFrame = frame;
+            var newFrame = Instantiate(carFrame.gameObject, transform);
+            currentFrameInsance = newFrame.GetComponent<CarFrame>();
+
+            if (respawnModules)
+            {
+                Dictionary<CarModuleSlot, CarSlotData> slots = modules.ToDictionary(
+                    x => x.Key,
+                    x => new CarSlotData { type = x.Value.GetModuleType(), level = x.Value.level }
+                );
+                SpawnModules(slots);    
+            }
         }
 
         public CarModule GetModuleInSlot(CarModuleSlot slot)
@@ -93,10 +142,18 @@ namespace KenneyJam.Game.PlayerCar
 
         public void ActivateModule(CarModuleSlot moduleSlot)
         {
-            CarModule mod = modules[moduleSlot];
-            if (mod != null)
+            if (modules.TryGetValue(moduleSlot, out var mod))
             {
                 mod.Activate();
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (isPlayer)
+            {
+                persistentData.SaveModuleStates(modules);
+                persistentData.carFrame = carFrame;
             }
         }
     }
