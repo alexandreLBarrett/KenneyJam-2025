@@ -18,6 +18,10 @@ public class CarStats : ScriptableObject
 
     [Header("Visual/Audio")]
     public string carName = "Default Car";
+    public float engineVolumeLinearVelocityFactor = 1;
+    public float engineVolumeAngularVelocityFactor = 1;
+    public float engineVolumeLerp = .05f;
+    public float engineGlobalVolue = .3f;
 
     [Header("Gameplay")]
     public int maxHealth = 20;
