@@ -7,6 +7,7 @@ public class RailgunLaser : MonoBehaviour
     public float totalLifespan = 0.6f;
     public float startRamp = 0.1f;
     public float endRamp = 0.7f;
+
     private float currentTime = 0;
 
     private LineRenderer lineRenderer;
@@ -22,10 +23,10 @@ public class RailgunLaser : MonoBehaviour
         }
     }
 
-    void Start()
+    public void SetupVFXPosition(Vector3 endPositionWorldSpace)
     {
         lineRenderer.useWorldSpace = true;
-        lineRenderer.SetPositions(new[] { transform.position, transform.position + transform.forward * 10.0f });
+        lineRenderer.SetPositions(new[] { transform.position, endPositionWorldSpace });
         // This component is spawned with a parent for its initial position. Now that that is determined, we detach.
         transform.SetParent(null);
     }

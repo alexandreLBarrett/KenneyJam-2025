@@ -73,7 +73,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b19a3e56f333b2b4896f988ad33768b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 8bdb3a50f9006094a8ce183c49613061, type: 2}
+  stats: {fileID: 11400000, guid: 4ae19f4971197614598d82ecc51a73e0, type: 2}
+  onCarDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onDamageTaken:
+    m_PersistentCalls:
+      m_Calls: []
+  onHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3195681891011641113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,5 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3121bff2c2b04ced8994c761a02be7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: e882b0022a762684e92c4e3a7a5421fe, type: 2}
-  carFramePrefab: {fileID: 4676624343508298828, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}
+  defaults: {fileID: 11400000, guid: e882b0022a762684e92c4e3a7a5421fe, type: 2}
+  modulesDB: {fileID: 11400000, guid: 8fa63591e3e3c834d8b889255699ad3f, type: 2}
+  carFrame: {fileID: 8066831284391393388, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}
