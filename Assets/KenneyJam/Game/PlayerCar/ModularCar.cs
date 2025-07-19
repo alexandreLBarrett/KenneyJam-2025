@@ -46,8 +46,7 @@ namespace KenneyJam.Game.PlayerCar
                 persistentData = FindAnyObjectByType<PersistentCarData>();
                 if (persistentData)
                 {
-                    SetCarFrame(persistentData.carFrame, false);
-                    SpawnModules(persistentData.moduleSlotData);
+                    SetCarPreset(persistentData.carFrame, persistentData.moduleSlotData);
                     isInitialized = true;
                 }
                 else
@@ -59,8 +58,7 @@ namespace KenneyJam.Game.PlayerCar
             
             if (!isInitialized && preset)
             {
-                SetCarFrame(preset.frame, false);
-                SpawnModules(preset.GetModuleSlotData());
+                SetCarPreset(preset.frame, preset.GetModuleSlotData());
             }
         }
         
@@ -108,6 +106,12 @@ namespace KenneyJam.Game.PlayerCar
             }
             
             SpawnCarPart(slot, new CarSlotData{ level = data.level, type = data.type });
+        }
+
+        public void SetCarPreset(CarFrame frame, Dictionary<CarModuleSlot, CarSlotData> modules)
+        {
+            SetCarFrame(frame, false);
+            SpawnModules(modules);
         }
         
         public void SetCarFrame(CarFrame frame, bool respawnModules)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace KenneyJam.Game.PlayerCar
 {
-    [CreateAssetMenu(fileName = "New CarDataDefaults", menuName = "Scriptable Objects/CarDataDefaults")]
+    [CreateAssetMenu(fileName = "New CarDataPreset", menuName = "Scriptable Objects/CarDataPreset")]
     public class CarDataPreset : ScriptableObject
     {
         public List<CarSlotDescription> moduleDesc;
