@@ -17997,6 +17997,10 @@ PrefabInstance:
       propertyPath: gamepad
       value: 
       objectReference: {fileID: 1801234898}
+    - target: {fileID: 7481660726637750207, guid: 9ab431cf2af97c041bbdbb98be3edf59, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.436
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
