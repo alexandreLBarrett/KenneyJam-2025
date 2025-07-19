@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3121bff2c2b04ced8994c761a02be7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: e882b0022a762684e92c4e3a7a5421fe, type: 2}
-  carFrame: {fileID: 2053740203204837698, guid: 7c46a875ee2106f4b857f34b2d709712, type: 3}
+  defaults: {fileID: 11400000, guid: e882b0022a762684e92c4e3a7a5421fe, type: 2}
+  modulesDB: {fileID: 11400000, guid: 8fa63591e3e3c834d8b889255699ad3f, type: 2}
+  carFrame: {fileID: 6851604215783760965, guid: 7c46a875ee2106f4b857f34b2d709712, type: 3}

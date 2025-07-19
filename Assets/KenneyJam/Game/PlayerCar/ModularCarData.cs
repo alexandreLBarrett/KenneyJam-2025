@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ModularCarData", menuName = "Scriptable Objects/ModularCarData")]
 public class ModularCarData : ScriptableObject
 {
-    public List<CarPartPair> partPrefabs;
+    public List<CarSlotDescription> partPrefabs;
 }

@@ -18,7 +18,7 @@ MonoBehaviour:
   - moduleSlot: 1
     gameObject: {fileID: 4238420060159345081, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
   - moduleSlot: 2
-    gameObject: {fileID: 4238420060159345081, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
+    gameObject: {fileID: 568943767515633430, guid: 865ab833012c92545bd1e2f830a592dd, type: 3}
   - moduleSlot: 3
     gameObject: {fileID: 4238420060159345081, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
   - moduleSlot: 4

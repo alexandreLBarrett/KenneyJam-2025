@@ -96,7 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4511610832994560963}
   m_Layer: 0
-  m_Name: FrontRight
+  m_Name: FrontLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,16 +164,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchors:
-  - moduleSlot: 0
-    gameObject: {fileID: 3439336880244720246}
-  - moduleSlot: 1
-    gameObject: {fileID: 3676856121490705611}
-  - moduleSlot: 2
-    gameObject: {fileID: 1469384471145147518}
-  - moduleSlot: 3
-    gameObject: {fileID: 4578229282515709049}
-  - moduleSlot: 4
-    gameObject: {fileID: 3222002807728694320}
+  - slot: 0
+    anchor: {fileID: 3439336880244720246}
+  - slot: 1
+    anchor: {fileID: 1469384471145147518}
+  - slot: 2
+    anchor: {fileID: 3676856121490705611}
+  - slot: 3
+    anchor: {fileID: 3222002807728694320}
+  - slot: 4
+    anchor: {fileID: 4578229282515709049}
 --- !u!1 &3222002807728694320
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5752298990653645850}
   m_Layer: 0
-  m_Name: BackRight
+  m_Name: BackLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1298051728245098665}
   m_Layer: 0
-  m_Name: FrontLeft
+  m_Name: FrontRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -566,7 +566,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7104228072027227391}
   m_Layer: 0
-  m_Name: BackLeft
+  m_Name: BackRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
