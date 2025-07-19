@@ -100,13 +100,17 @@ namespace KenneyJam.Game.PlayerCar
 
         public void SetCarModule(CarModuleSlot slot, CarSlotData data)
         {
+            DestroyCarModule(slot);
+            SpawnCarPart(slot, new CarSlotData{ level = data.level, type = data.type });
+        }
+
+        public void DestroyCarModule(CarModuleSlot slot)
+        {
             if (modules.TryGetValue(slot, out var module))
             {
                 Destroy(module.gameObject);
                 modules.Remove(slot);
             }
-            
-            SpawnCarPart(slot, new CarSlotData{ level = data.level, type = data.type });
         }
 
         public void SetCarPreset(CarFrame frame, Dictionary<CarModuleSlot, CarSlotData> modules)
@@ -136,9 +140,13 @@ namespace KenneyJam.Game.PlayerCar
             }
         }
 
-        public CarModule GetModuleInSlot(CarModuleSlot slot)
+        public CarModule? GetModuleInSlot(CarModuleSlot slot)
         {
-            return modules.GetValueOrDefault(slot);
+            if (modules.TryGetValue(slot, out CarModule module))
+            {
+                return module;
+            }
+            return null;
         }
 
         public void ActivateModule(CarModuleSlot moduleSlot)
@@ -160,6 +168,18 @@ namespace KenneyJam.Game.PlayerCar
                 }
             }
             return armorValue;
+        }
+
+        public int GetPurchaseCost(CarModule.Type moduleType)
+        {
+            var moduleInfo = modulesDB.GetModuleInfo(moduleType);
+            return moduleInfo.purchaseCost;
+        }
+
+        public int GetUpgradeCost(CarModule.Type moduleType)
+        {
+            var moduleInfo = modulesDB.GetModuleInfo(moduleType);
+            return moduleInfo.upgradeCost;
         }
 
         private void OnDestroy()

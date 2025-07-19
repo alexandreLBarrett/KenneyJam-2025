@@ -13,6 +13,7 @@ public class FightingGameMode : MonoBehaviour
 
     private bool matchEnded = false;
     private int remainingOponents;
+    private TournamentData.Match match;
         
     public static void Shuffle<T>(IList<T> list)
     {
@@ -24,20 +25,42 @@ public class FightingGameMode : MonoBehaviour
             (list[k], list[n]) = (list[n], list[k]);
         }
     }
-    
+
+    private void Awake()
+    {
+        match = CarSceneManager.Instance.GetCurrentMatch();
+    }
+
     void Start()
     {
-        if (spawnPoints.Length == 0)
+        StartPrematch();
+    }
+
+    void StartMatch()
+    {
+        if (spawnPoints.Length == 0 || spawnPoints.Length > match.playerCount)
+        {
+            Debug.LogWarning("Cannot proceed with match, not enough spawn points.");
+            matchEnded = true;
             return;
-        
+        }
+
         Shuffle(spawnPoints);
 
         SpawnPlayer(spawnPoints[0]);
-        for (int i = 1; i < spawnPoints.Length; ++i)
+        for (int i = 1; i < match.playerCount; ++i)
         {
             SpawnBot(spawnPoints[i]);
             remainingOponents++;
         }
+    }
+
+    void StartPrematch()
+    {
+        // TODO: display info about the game (UI to show the rewards and the enemies with their names)
+
+        // Then start the match after countdown:
+        StartMatch();
     }
 
     void SpawnPlayer(GameObject gameObject)
@@ -56,7 +79,7 @@ public class FightingGameMode : MonoBehaviour
         GameUIManager uiManager = FindAnyObjectByType<GameUIManager>();
         uiManager.BindToController(controller);
     }
-    
+
     void SpawnBot(GameObject gameObject)
     {
         GameObject aiCar = Instantiate(AIPrefab);
@@ -67,12 +90,13 @@ public class FightingGameMode : MonoBehaviour
         modularCar.preset = aiPresets[Random.Range(0, aiPresets.Length)];
 
         CarController controller = aiCar.GetComponentInChildren<CarController>();
-        controller.onCarDeath.AddListener(t => {
+        controller.onCarDeath.AddListener(t =>
+        {
             if (matchEnded) return;
             remainingOponents--;
             if (remainingOponents <= 0)
             {
-                CarSceneManager.Instance.TriggerGameWon();
+                CarSceneManager.Instance.TriggerGameWon(match.currencyReward);
                 matchEnded = true;
             }
         });

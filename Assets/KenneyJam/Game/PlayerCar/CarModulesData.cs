@@ -12,6 +12,8 @@ public class CarModulesData : ScriptableObject
         public CarModule.Type type;
         public CarModule lvl1Module;
         public CarModule lvl2Module;
+        public int purchaseCost;
+        public int upgradeCost;
     }
 
     public ModuleInfo[] moduleTypes;

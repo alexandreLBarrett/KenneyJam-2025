@@ -1,5 +1,7 @@
 using KenneyJam.Game.PlayerCar;
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,30 +12,55 @@ public class CarSceneManager : MonoBehaviour
     public string gameScene = "GameScene";
     public float transitionDuration = .8f;
 
-    public int PlayerLives = 3;
-    public int GamesWon = 0;
+    public int playerLives;
+    public int playerCurrency;
+    public int currentMatch;
 
+    public TournamentData tournamentData;
+    
     public static CarSceneManager Instance { get {
-        CarSceneManager existing = FindAnyObjectByType<CarSceneManager>();
-        if (existing) return existing;
-
-        GameObject instance = Instantiate(new GameObject());
-        DontDestroyOnLoad(instance);
-        return instance.AddComponent<CarSceneManager>();
+            return instance;
     } }
+
+    private static CarSceneManager instance;
+
+    private void Awake()
+    {
+        if (instance != null && gameObject != instance)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+        // Default init, only used for when we run a scene without passing through the typical flow (eg: when running the garage independantly).
+        // Don't remove pls :-)
+        currentMatch = 0;
+        playerLives = tournamentData.startingLives;
+        playerCurrency = tournamentData.startingCurrency;
+    }
 
     public void StartGame()
     {
         Destroy(PersistentCarData.GetPersistentCarData());
-        GamesWon = 0;
-        PlayerLives = 3;
+        currentMatch = 0;
+        playerLives = tournamentData.startingLives;
+        playerCurrency = tournamentData.startingCurrency;
         LoadGame();
+    }
+
+    public TournamentData.Match GetCurrentMatch()
+    {
+        return tournamentData.matches[currentMatch];
     }
 
     public void TriggerGameLost()
     {
-        PlayerLives--;
-        if (PlayerLives <= 0)
+        playerLives--;
+        if (playerLives <= 0)
         {
             SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.GameLost);
             StartCoroutine(StartLevelTransition(gameScene, 2));
@@ -45,9 +72,22 @@ public class CarSceneManager : MonoBehaviour
         }
     }
 
-    public void TriggerGameWon()
+    public void TriggerGameWon(int currencyReward)
     {
-        StartCoroutine(StartLevelTransition(garageScene, 2f));
+        playerCurrency += currencyReward;
+        currentMatch++;
+        if (currentMatch < tournamentData.matches.Count)
+        {
+            StartCoroutine(StartLevelTransition(garageScene, 2f));
+        }
+        else
+        {
+            // TODO: trigger the final "You win!" screen (podium or something?)
+
+            // Temp: load the garage and restart at match 0:
+            currentMatch = 0;
+            StartCoroutine(StartLevelTransition(garageScene, 2f));
+        }
     }
 
     public void LoadGarage()
@@ -82,4 +122,11 @@ public class CarSceneManager : MonoBehaviour
         SceneManager.LoadScene(toScene);
     }
 
+    public void OnValidate()
+    {
+        if (tournamentData == null)
+        {
+            Debug.LogWarning("Tournament data has not been set for the CarSceneManager!");
+        }
+    }
 }

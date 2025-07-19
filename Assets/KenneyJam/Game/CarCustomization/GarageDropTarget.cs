@@ -1,4 +1,3 @@
-using System;
 using KenneyJam.Game.PlayerCar;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,21 +5,24 @@ using UnityEngine.UI;
 
 public class GarageDropTarget : MonoBehaviour, IDropHandler
 {
-    private ModularCar car;
-    private GameObject anchor;
     public CarModuleSlot targetSlot;
-
     public Button upgradeButton;
+    public Button destroyButton;
+
+    private ModularCar car;
 
     public void Start()
     {
         car = FindAnyObjectByType<ModularCar>();
+        CarModule module = car.GetModuleInSlot(targetSlot);
         
         upgradeButton.onClick.AddListener(Upgrade);
-        
-        CarModule module = car.GetModuleInSlot(targetSlot);
         upgradeButton.enabled = module && module.level == CarModule.Level.LVL1;
         upgradeButton.gameObject.SetActive(upgradeButton.enabled);
+
+        destroyButton.onClick.AddListener(Destroy);
+        destroyButton.enabled = module != null;
+        destroyButton.gameObject.SetActive(destroyButton.enabled);
     }
 
     private void Update()
@@ -34,13 +36,33 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
     {
         CarModule module = car.GetModuleInSlot(targetSlot);
         if (!module || module.level == CarModule.Level.LVL2) return;
-        
-        // TODO: Apply cost
 
-        
+        int upgradeCost = car.GetUpgradeCost(module.GetModuleType());
+        if (CarSceneManager.Instance.playerCurrency < upgradeCost)
+        {
+            // Too broke, do nothing.
+            // TODO: UI indicator
+            return;
+        }
+
+        CarSceneManager.Instance.playerCurrency -= upgradeCost;
+
         car.SetCarModule(targetSlot, new CarSlotData{ level = CarModule.Level.LVL2, type = module.GetModuleType() });
-        upgradeButton.gameObject.SetActive(false);
+
         upgradeButton.enabled = false;
+        upgradeButton.gameObject.SetActive(upgradeButton.enabled);
+    }
+
+    // Destroy the module, don't sell because albin said so :(
+    public void Destroy()
+    {
+        car.DestroyCarModule(targetSlot);
+
+        upgradeButton.enabled = false;
+        upgradeButton.gameObject.SetActive(upgradeButton.enabled);
+
+        destroyButton.enabled = false;
+        destroyButton.gameObject.SetActive(destroyButton.enabled);
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -51,15 +73,26 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
         CarModule module = car.GetModuleInSlot(targetSlot);
         if (module && module.GetModuleType() == origin.type && module.level == CarModule.Level.LVL1)
         {
-            // Module is identical do nothing
+            // Module is identical, do nothing
             return;
         }
-        
-        // TODO: Apply cost
-        
+
+        int purchaseCost = car.GetPurchaseCost(origin.type);
+        if (CarSceneManager.Instance.playerCurrency < purchaseCost)
+        {
+            // Too broke, do nothing.
+            // TODO: UI indicator
+            return;
+        }
+
+        CarSceneManager.Instance.playerCurrency -= purchaseCost;
+
         car.SetCarModule(targetSlot, new CarSlotData{ level = CarModule.Level.LVL1, type = origin.type });
         
-        upgradeButton.gameObject.SetActive(true);
         upgradeButton.enabled = true;
+        upgradeButton.gameObject.SetActive(upgradeButton.enabled);
+
+        destroyButton.enabled = true;
+        destroyButton.gameObject.SetActive(destroyButton.enabled);
     }
 }

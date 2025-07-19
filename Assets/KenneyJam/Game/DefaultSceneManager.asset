@@ -16,4 +16,6 @@ MonoBehaviour:
   garageScene: GarageScene
   gameScene: MainScene
   transitionDuration: 0.8
-  PlayerLives: 3
+  playerLives: 0
+  currentMatch: 0
+  tournamentData: {fileID: 11400000, guid: 7a3646fabd21bda41ace65c02c6f32aa, type: 2}
