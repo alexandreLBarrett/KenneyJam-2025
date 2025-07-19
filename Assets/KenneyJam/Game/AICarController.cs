@@ -31,12 +31,13 @@ public class AICarController : MonoBehaviour
     private float[] moduleCooldowns = new float[5];
     private float[] moduleRawCooldown = new float[5];
 
-    private bool isTeabaging = Random.Range(0,2)==0;
+    private bool isTeabaging;
 
     void Start()
     {
         controller = GetComponent<CarController>();
         modularCar = GetComponent<ModularCar>();
+        isTeabaging = Random.Range(0, 2) == 0;
     }
 
     void OnDrawGizmos()

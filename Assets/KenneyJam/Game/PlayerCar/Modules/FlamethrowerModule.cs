@@ -21,7 +21,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
         private GameObject currentFlamesVFX;
         private AudioSource currentFlamesSFX;
 
-        public override float Cooldown => 1;
+        public override float Cooldown => cooldown;
 
         public override Type GetModuleType()
         {
@@ -101,6 +101,20 @@ namespace KenneyJam.Game.PlayerCar.Modules
 
         public override bool CanHitAnyone()
         {
+            List<string> foundCars = new();
+            Collider[] cols = Physics.OverlapBox(
+                transform.TransformPoint(boxCollider.center), // Convert local center to world space
+                Vector3.Scale(boxCollider.size / 2.0f, transform.lossyScale), // Half extents
+                transform.rotation // Use the transform's rotation, not parent's
+            );
+            foreach (Collider col in cols)
+            {
+                // Has Car tag, hasn't already been found and is not us.
+                if (col.gameObject.CompareTag("Car") && !foundCars.Contains(col.gameObject.name) && col.transform.root.gameObject.name != transform.root.gameObject.name)
+                {
+                    return true;
+                }
+            }
             return false;
         }
     }
