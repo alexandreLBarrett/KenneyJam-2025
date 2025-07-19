@@ -10,6 +10,9 @@ public class FightingGameMode : MonoBehaviour
     public GameObject AIPrefab;
 
     public CarDataPreset[] aiPresets;
+
+    private bool matchEnded = false;
+    private int remainingOponents;
         
     public static void Shuffle<T>(IList<T> list)
     {
@@ -33,6 +36,7 @@ public class FightingGameMode : MonoBehaviour
         for (int i = 1; i < spawnPoints.Length; ++i)
         {
             SpawnBot(spawnPoints[i]);
+            remainingOponents++;
         }
     }
 
@@ -41,6 +45,16 @@ public class FightingGameMode : MonoBehaviour
         GameObject playerCar = Instantiate(PlayerPrefab);
         playerCar.transform.position = gameObject.transform.position;
         playerCar.transform.rotation = gameObject.transform.rotation;
+
+        CarController controller = playerCar.GetComponentInChildren<CarController>();
+        controller.onCarDeath.AddListener(t => {
+            if (matchEnded) return;
+            CarSceneManager.Instance.TriggerGameLost();
+            matchEnded = true;
+        });
+
+        GameUIManager uiManager = FindAnyObjectByType<GameUIManager>();
+        uiManager.BindToController(controller);
     }
     
     void SpawnBot(GameObject gameObject)
@@ -50,7 +64,17 @@ public class FightingGameMode : MonoBehaviour
         aiCar.transform.rotation = gameObject.transform.rotation;
 
         ModularCar modularCar = aiCar.GetComponentInChildren<ModularCar>();
-        
         modularCar.preset = aiPresets[Random.Range(0, aiPresets.Length)];
+
+        CarController controller = aiCar.GetComponentInChildren<CarController>();
+        controller.onCarDeath.AddListener(t => {
+            if (matchEnded) return;
+            remainingOponents--;
+            if (remainingOponents <= 0)
+            {
+                CarSceneManager.Instance.TriggerGameWon();
+                matchEnded = true;
+            }
+        });
     }
 }

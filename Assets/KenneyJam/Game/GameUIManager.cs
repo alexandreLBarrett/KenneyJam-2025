@@ -13,14 +13,12 @@ public class GameUIManager : MonoBehaviour
 
     void Start()
     {
-        if (controller != null)
-        {
-            controller.onHealthChanged.AddListener(OnHealthChangedCallback);
-        }
     }
 
-    void Update()
+    public void BindToController(CarController controller)
     {
+        this.controller = controller;
+        controller.onHealthChanged.AddListener(OnHealthChangedCallback);
     }
 
     void OnHealthChangedCallback(float health, float maxHealth)

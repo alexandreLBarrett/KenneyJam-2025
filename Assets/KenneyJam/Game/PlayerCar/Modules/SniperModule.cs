@@ -22,7 +22,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
                 Debug.Log("An hit was registered on " + hit.collider.gameObject.name + ".");
                 if (hit.collider.CompareTag("Car"))
                 {
-                    hit.collider.GetComponentInParent<CarController>().InflictDamage(damage);
+                    hit.collider.GetComponentInParent<CarController>().InflictDamage(gameObject.GetComponentInParent<CarController>(), damage);
                 }
             }
             RailgunLaser laser = Instantiate(laserVFXPrefab, muzzleTransform).GetComponent<RailgunLaser>();

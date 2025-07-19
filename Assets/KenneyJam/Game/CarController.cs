@@ -9,10 +9,10 @@ public class CarController : MonoBehaviour
 
     private Rigidbody rb;
     private float currentSpeed;
-    private float currentHealth;
+    public float currentHealth;
 
     public UnityEvent<Transform /* carTransform */> onCarDeath;
-    public UnityEvent<float /* damage */, CarController /* car */> onDamageTaken;
+    public UnityEvent<float /* damage */, CarController /* damageDealer */> onDamageTaken;
     public UnityEvent<float/*health*/, float/*maxHealth*/> onHealthChanged;
 
     private AudioSource engineAudioSource;
@@ -35,6 +35,18 @@ public class CarController : MonoBehaviour
         InitializePhysicsWithStats();
 
         currentHealth = stats.maxHealth;
+
+        onDamageTaken.AddListener((damage,damageDealer) => {
+            if (currentHealth <= 0)
+            {
+                SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.CarBreak);
+                rb.AddForce(((transform.position - damageDealer.transform.position).normalized + Vector3.up) * 50000, ForceMode.Impulse);
+            }
+            else
+            {
+                SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.CarDamageTaken, .5f);
+            }
+        });
     }
 
     private void InitializePhysicsWithStats()
@@ -126,15 +138,17 @@ public class CarController : MonoBehaviour
         }
     }
 
-    public void InflictDamage(float damageValue)
+    public void InflictDamage(CarController damageDealer, float damageValue)
     {
         currentHealth -= damageValue;
-        onDamageTaken.Invoke(currentHealth, this);
-        if (currentHealth < 0)
+        onDamageTaken.Invoke(currentHealth, damageDealer);
+        onHealthChanged.Invoke(currentHealth, stats.maxHealth);
+        if (currentHealth <= 0)
         {
             onCarDeath.Invoke(transform);
             onCarDeath.RemoveAllListeners();
-            Destroy(transform.root.gameObject);
+            onDamageTaken.RemoveAllListeners();
+            onHealthChanged.RemoveAllListeners();
         }
     }
 
