@@ -44,6 +44,7 @@ namespace KenneyJam.Game.PlayerCar
         private void Start()
         {
             GameObject car = Instantiate(carFrame.gameObject, transform);
+            carFrame = car.GetComponent<CarFrame>();
             
             SpawnModules();
         }

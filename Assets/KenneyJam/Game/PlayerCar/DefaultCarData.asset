@@ -14,12 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partPrefabs:
   - moduleSlot: 0
-    gameObject: {fileID: 5506270998500815419, guid: f1e8350ac1c23b6489b4bcf5be508b55, type: 3}
+    type: 2
+    level: 1
   - moduleSlot: 1
-    gameObject: {fileID: 4238420060159345081, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
+    type: 2
+    level: 0
   - moduleSlot: 2
-    gameObject: {fileID: 568943767515633430, guid: 865ab833012c92545bd1e2f830a592dd, type: 3}
+    type: 0
+    level: 0
   - moduleSlot: 3
-    gameObject: {fileID: 4238420060159345081, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
+    type: 0
+    level: 0
   - moduleSlot: 4
-    gameObject: {fileID: 4238420060159345081, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
+    type: 0
+    level: 0

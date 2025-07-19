@@ -348,16 +348,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anchors:
-  - moduleSlot: 0
-    gameObject: {fileID: 8684564829072683656}
-  - moduleSlot: 1
-    gameObject: {fileID: 5520973356194755885}
-  - moduleSlot: 2
-    gameObject: {fileID: 107439390954583441}
-  - moduleSlot: 3
-    gameObject: {fileID: 2378003497619596248}
-  - moduleSlot: 4
-    gameObject: {fileID: 2832542538137739068}
+  - slot: 0
+    anchor: {fileID: 8684564829072683656}
+  - slot: 1
+    anchor: {fileID: 5520973356194755885}
+  - slot: 2
+    anchor: {fileID: 107439390954583441}
+  - slot: 3
+    anchor: {fileID: 2378003497619596248}
+  - slot: 4
+    anchor: {fileID: 2832542538137739068}
 --- !u!1 &5520973356194755885
 GameObject:
   m_ObjectHideFlags: 0
