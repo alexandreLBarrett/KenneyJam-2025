@@ -36,12 +36,12 @@ public class CarSceneManager : MonoBehaviour
         if (PlayerLives <= 0)
         {
             SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.GameLost);
-            StartCoroutine(StartLevelTransition(gameScene, 2));
+            StartCoroutine(StartLevelTransition(menuScene, 2));
         }
         else
         {
             SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.MatchLost);
-            StartCoroutine(StartLevelTransition(menuScene, 2));
+            StartCoroutine(StartLevelTransition(gameScene, 2));
         }
     }
 

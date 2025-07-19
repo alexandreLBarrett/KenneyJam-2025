@@ -15,6 +15,8 @@ namespace KenneyJam.Game.PlayerCar.Modules
         private Animator animator;
         private BoxCollider boxCollider;
 
+        public override float Cooldown => cooldown;
+
         void Awake()
         {
             boxCollider = GetComponent<BoxCollider>();
@@ -64,6 +66,24 @@ namespace KenneyJam.Game.PlayerCar.Modules
             SoundManager.Instance.PlayInstantSound(flipSound);
             
             currentCooldown = cooldown;
+        }
+
+        public override bool CanHitAnyone()
+        {
+            Collider[] cols = Physics.OverlapBox(
+                transform.TransformPoint(boxCollider.center), // Convert local center to world space
+                Vector3.Scale(boxCollider.size / 2.0f, transform.lossyScale), // Half extents
+                transform.rotation // Use the transform's rotation, not parent's
+            );
+            foreach (Collider col in cols)
+            {
+                // Has Car tag, hasn't already been found and is not us.
+                if (col.gameObject.CompareTag("Car") && col.transform.root.gameObject.name != transform.root.gameObject.name)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

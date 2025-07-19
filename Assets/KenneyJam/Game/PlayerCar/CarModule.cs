@@ -23,7 +23,10 @@ namespace KenneyJam.Game.PlayerCar
         
         public Level level;
 
+        public abstract bool CanHitAnyone();
         public abstract Type GetModuleType();
         public abstract void Activate();
+
+        public abstract float Cooldown { get; }
     }
 }

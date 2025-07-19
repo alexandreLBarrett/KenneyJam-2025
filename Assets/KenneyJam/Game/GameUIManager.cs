@@ -22,6 +22,7 @@ public class GameUIManager : MonoBehaviour
         livesRemaining1.SetActive(CarSceneManager.Instance.PlayerLives >= 1);
         livesRemaining1.SetActive(CarSceneManager.Instance.PlayerLives >= 2);
         livesRemaining1.SetActive(CarSceneManager.Instance.PlayerLives >= 3);
+        victoriesText.text = CarSceneManager.Instance.GamesWon.ToString();
     }
 
     void OnHealthChangedCallback(float health, float maxHealth)
