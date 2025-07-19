@@ -9,10 +9,17 @@ public class Joystick : MonoBehaviour
     private Vector3 initialPosition;
     private bool isDragging = false;
 
+    private Gamepad Gamepad;
+
     private void Awake()
     {
         mainCamera = Camera.main;
         initialPosition = transform.position;
+    }
+
+    private void Start()
+    {
+        Gamepad = GetComponentInParent<Gamepad>();
     }
 
     private void Update()
@@ -29,6 +36,7 @@ public class Joystick : MonoBehaviour
         {
             isDragging = false;
             transform.position = initialPosition;
+            Gamepad.OnJoystickMoved.Invoke(0, 0);
         }
     }
 
@@ -38,7 +46,7 @@ public class Joystick : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && hit.transform == transform)
         {
-            dragPlane = new Plane(Vector3.up, transform.position);
+            dragPlane = new Plane(transform.up, transform.position);
             float enter;
             if (dragPlane.Raycast(ray, out enter))
             {
@@ -58,7 +66,9 @@ public class Joystick : MonoBehaviour
             Vector3 hitPoint = ray.GetPoint(enter);
             Vector3 positionUnclamped = hitPoint + offset;
             Vector3 linearOffset = positionUnclamped - initialPosition;
-            transform.position = Mathf.Min(linearOffset.magnitude, maxDistanceToOrigin) * linearOffset.normalized + initialPosition;
+            Vector3 finalOffset = Mathf.Min(linearOffset.magnitude, maxDistanceToOrigin) * linearOffset.normalized;
+            transform.position = finalOffset + initialPosition;
+            Gamepad.OnJoystickMoved.Invoke(Vector3.Dot(finalOffset, transform.forward) / maxDistanceToOrigin, -Vector3.Dot(finalOffset, transform.right) / maxDistanceToOrigin);
         }
     }
 }

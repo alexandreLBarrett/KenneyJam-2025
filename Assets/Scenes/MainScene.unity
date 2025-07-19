@@ -16508,8 +16508,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2340761993334214287, guid: 42636a8e0caaaf84daad2e11f1f5f37b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1801234898}
   m_SourcePrefab: {fileID: 100100000, guid: 42636a8e0caaaf84daad2e11f1f5f37b, type: 3}
+--- !u!1 &1801234897 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2340761993334214287, guid: 42636a8e0caaaf84daad2e11f1f5f37b, type: 3}
+  m_PrefabInstance: {fileID: 1801234896}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1801234898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801234897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a852295c62fe044790a59ef7465772e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnButtonPressed:
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  - m_PersistentCalls:
+      m_Calls: []
+  OnJoystickMoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1845716498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17959,18 +17993,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7481660726637750207, guid: 9ab431cf2af97c041bbdbb98be3edf59, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.349
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481660726637750207, guid: 9ab431cf2af97c041bbdbb98be3edf59, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.055
-      objectReference: {fileID: 0}
-    - target: {fileID: 7481660726637750207, guid: 9ab431cf2af97c041bbdbb98be3edf59, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 3556884572661660052, guid: 9ab431cf2af97c041bbdbb98be3edf59, type: 3}
+      propertyPath: gamepad
+      value: 
+      objectReference: {fileID: 1801234898}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
