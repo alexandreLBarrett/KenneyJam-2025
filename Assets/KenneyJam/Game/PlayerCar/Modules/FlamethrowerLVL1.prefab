@@ -139,7 +139,7 @@ MonoBehaviour:
   tickDamage: 1.66
   muzzle: {fileID: 346642496514682408}
   flamesPrefab: {fileID: 841930211868164732, guid: b75ef4abbbd79b74db53ad9f37af899e, type: 3}
-  flamesSFXVolume: 0.6
+  flamesSFXVolume: 0.2
   flamesSFXLooped: {fileID: 8300000, guid: 8289bd0f6fec7fc43814486d91c7084f, type: 3}
 --- !u!65 &3868529783183689556
 BoxCollider:

@@ -30,9 +30,8 @@ namespace KenneyJam.Game.PlayerCar.Modules
             currentCooldown = cooldown;
             Transform muzzleTransform = muzzle.transform;
             RaycastHit hit;
-            if (Physics.Raycast(muzzleTransform.position, muzzleTransform.forward, out hit, 10000.0f))
+            if (Physics.Raycast(transform.position, muzzleTransform.forward, out hit, 10000.0f))
             {
-                Debug.Log("An hit was registered on " + hit.collider.gameObject.name + ".");
                 if (hit.collider.CompareTag("Car"))
                 {
                     hit.collider.GetComponentInParent<CarController>().InflictDamage(gameObject.GetComponentInParent<CarController>(), damage);
