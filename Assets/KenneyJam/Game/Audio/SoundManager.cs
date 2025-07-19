@@ -74,12 +74,12 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public AudioSource CreatePermanentAudioSource(AudioClip clip)
+    public AudioSource CreatePermanentAudioSource(AudioClip clip, float volume = 1)
     {
         AudioSource source = Instantiate(audioSourceObject, transform);
         source.clip = clip;
         source.loop = true;
-        source.volume = 1;
+        source.volume = volume;
         source.Play();
         return source;
     }

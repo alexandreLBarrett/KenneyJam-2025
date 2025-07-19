@@ -15,7 +15,7 @@ MonoBehaviour:
   moduleTypes:
   - type: 0
     lvl1Module: {fileID: 8782619335547852706, guid: c221d0f2e334ab241ac20f6b791d798f, type: 3}
-    lvl2Module: {fileID: 7934906419178974078, guid: 865ab833012c92545bd1e2f830a592dd, type: 3}
+    lvl2Module: {fileID: 4840945303515949681, guid: 01a9b1586d1042547a9b6a73068c51f3, type: 3}
   - type: 1
     lvl1Module: {fileID: 79248874073211187, guid: d19fd554bb27a164eacead766d6db2ab, type: 3}
     lvl2Module: {fileID: 8336491055933039462, guid: c7f7c5379e19f2b429f0b414982e26ff, type: 3}
