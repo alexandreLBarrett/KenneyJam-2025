@@ -138,8 +138,7 @@ namespace KenneyJam.Game.PlayerCar
 
         public void ActivateModule(CarModuleSlot moduleSlot)
         {
-            CarModule mod = modules[moduleSlot];
-            if (mod != null)
+            if (modules.TryGetValue(moduleSlot, out var mod))
             {
                 mod.Activate();
             }
