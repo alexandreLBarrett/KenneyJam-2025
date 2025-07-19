@@ -54,7 +54,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
                 if (col.gameObject.CompareTag("Car") && !foundCars.Contains(col.gameObject.name) && col.transform.root.gameObject.name != transform.root.gameObject.name)
                 {
                     col.GetComponentInParent<Rigidbody>().AddForce(transform.rotation * new Vector3(force, 0.05f, 0), ForceMode.Impulse);
-                    col.GetComponentInParent<CarController>().InflictDamage(damage);
+                    col.GetComponentInParent<CarController>().InflictDamage(gameObject.GetComponentInParent<CarController>(), damage);
                     foundCars.Add(col.gameObject.name);
                 }
             }
