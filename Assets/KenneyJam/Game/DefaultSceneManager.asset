@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46e0bc3f684ba804d9cc97a479558e3e, type: 3}
-  m_Name: EmptyCarPreset
+  m_Script: {fileID: 11500000, guid: c29192f138cafd1468e7b8c4be50835b, type: 3}
+  m_Name: DefaultSceneManager
   m_EditorClassIdentifier: 
-  partPrefabs: []
+  garageScene: GarageScene
+  gameScene: MainScene

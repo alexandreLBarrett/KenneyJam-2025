@@ -19,10 +19,9 @@ public class PlayerCarController : MonoBehaviour
         carController = GetComponentInChildren<CarController>();
         modularCar = GetComponentInChildren<ModularCar>();
         activateModuleActions = new();
-        int i = 1;
         foreach (CarModuleSlot slot in Enum.GetValues(typeof(CarModuleSlot)))
         {
-            activateModuleActions.Add(InputSystem.actions.FindAction("ActivateModule" + i++));
+            activateModuleActions.Add(InputSystem.actions.FindAction("ActivateModule" + ((int)slot + 1)));
         }
     }
 
@@ -36,9 +35,12 @@ public class PlayerCarController : MonoBehaviour
         }
         carController.UpdateMovement(moveValue.y, moveValue.x);
 
-        if (activateModuleActions[0].triggered)
+        for (int i = 0; i < activateModuleActions.Count; ++i)
         {
-            modularCar.ActivateModule(0);
+            if (activateModuleActions[i].triggered)
+            {
+                modularCar.ActivateModule((CarModuleSlot)i);    
+            }
         }
     }
 }
