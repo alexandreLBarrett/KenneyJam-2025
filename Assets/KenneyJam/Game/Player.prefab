@@ -57,6 +57,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GenericCar
       objectReference: {fileID: 0}
+    - target: {fileID: 3195681891011641113, guid: 1b9ccc864f0561242a4ddfed35153190, type: 3}
+      propertyPath: preset
+      value: 
+      objectReference: {fileID: 11400000, guid: e882b0022a762684e92c4e3a7a5421fe, type: 2}
+    - target: {fileID: 3195681891011641113, guid: 1b9ccc864f0561242a4ddfed35153190, type: 3}
+      propertyPath: isPlayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5512946486341694970, guid: 1b9ccc864f0561242a4ddfed35153190, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

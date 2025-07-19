@@ -14,8 +14,7 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
 
     public void Start()
     {
-        car = ModularCar.FindCarInScene();
-        anchor = car.GetAnchorForSlot(targetSlot);
+        car = FindAnyObjectByType<ModularCar>();
         
         upgradeButton.onClick.AddListener(Upgrade);
         
@@ -26,7 +25,7 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
 
     private void Update()
     {
-        Vector2 screenPoint = Camera.main.WorldToScreenPoint(anchor.transform.position);
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(car.GetAnchorForSlot(targetSlot).transform.position);
         transform.position = screenPoint;
     }
 
@@ -38,14 +37,8 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
         
         // TODO: Apply cost
 
-        var desc = new CarSlotDescription
-        {
-            type = module.GetModuleType(),
-            level = CarModule.Level.LVL2,
-            moduleSlot = targetSlot,
-        };
         
-        car.SetCarModule(desc);
+        car.SetCarModule(targetSlot, new CarSlotData{ level = CarModule.Level.LVL2, type = module.GetModuleType() });
         upgradeButton.gameObject.SetActive(false);
         upgradeButton.enabled = false;
     }
@@ -64,14 +57,7 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
         
         // TODO: Apply cost
         
-        var desc = new CarSlotDescription
-        {
-            type = origin.type,
-            level = CarModule.Level.LVL1,
-            moduleSlot = targetSlot,
-        };
-        
-        car.SetCarModule(desc);
+        car.SetCarModule(targetSlot, new CarSlotData{ level = CarModule.Level.LVL1, type = origin.type });
         
         upgradeButton.gameObject.SetActive(true);
         upgradeButton.enabled = true;

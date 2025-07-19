@@ -54,7 +54,7 @@ public class CarController : MonoBehaviour
         // Accelerate (when either turning or when moving forwards)
         if (currentSpeed < stats.maxSpeed && (engineInput > 0.001f || Mathf.Abs(steeringInput) > 0.1f))
         {
-            rb.AddForce(Mathf.Max(Mathf.Abs(engineInput), Mathf.Abs(steeringInput)) * Mathf.Sign(engineInput) * stats.acceleration * transform.forward, ForceMode.Acceleration);
+            rb.AddForce(Mathf.Max(engineInput, Mathf.Abs(steeringInput)) * Mathf.Sign(engineInput) * stats.acceleration * transform.forward, ForceMode.Acceleration);
         }
         // Brake
         else if (currentSpeed > 0 && engineInput < -0.001f)
