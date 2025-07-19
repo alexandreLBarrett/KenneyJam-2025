@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6515600397067270469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6419201743694619696}
+  m_Layer: 0
+  m_Name: muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6419201743694619696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6515600397067270469}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.041, z: -0.6213}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7182854749478923525}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7215920179343411950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65,13 +96,22 @@ PrefabInstance:
       value: SniperLVL2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6551238392589077143, guid: 5f6c8d4e0a8290e4ca8b701bceaef686, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f6c8d4e0a8290e4ca8b701bceaef686, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6419201743694619696}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f6c8d4e0a8290e4ca8b701bceaef686, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8443710190276458521}
   m_SourcePrefab: {fileID: 100100000, guid: 5f6c8d4e0a8290e4ca8b701bceaef686, type: 3}
+--- !u!4 &7182854749478923525 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f6c8d4e0a8290e4ca8b701bceaef686, type: 3}
+  m_PrefabInstance: {fileID: 7215920179343411950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7558571768879478719 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5f6c8d4e0a8290e4ca8b701bceaef686, type: 3}
@@ -90,3 +130,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  muzzle: {fileID: 0}

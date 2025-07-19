@@ -4,12 +4,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerCarController : MonoBehaviour
 {
-    public Gamepad gamepad;
+    private Gamepad gamepad;
     private InputAction moveAction;
     private CarController carController;
 
     void Awake()
     {
+        gamepad = FindFirstObjectByType<Gamepad>();
         moveAction = InputSystem.actions.FindAction("Move");
         carController = GetComponentInChildren<CarController>();
     }

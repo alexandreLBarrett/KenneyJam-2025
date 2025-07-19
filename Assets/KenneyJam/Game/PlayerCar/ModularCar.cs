@@ -24,7 +24,7 @@ namespace KenneyJam.Game.PlayerCar
     public class ModularCar : MonoBehaviour
     {
         public ModularCarData data;
-        public GameObject carFrame;
+        public GameObject carFramePrefab;
 
         private Dictionary<CarModuleSlot, CarModule> modules = new();
         
@@ -32,7 +32,7 @@ namespace KenneyJam.Game.PlayerCar
         {
             Debug.Assert(data);
 
-            GameObject car = Instantiate(carFrame);
+            GameObject car = Instantiate(carFramePrefab, transform);
             
             CarFrame frame = car.GetComponent<CarFrame>();
             Debug.Assert(frame != null);

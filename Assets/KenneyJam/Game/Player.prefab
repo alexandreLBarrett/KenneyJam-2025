@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1785ca94490e57644ad195e724a4bf9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gamepad: {fileID: 0}
 --- !u!1001 &7347432010712936496
 PrefabInstance:
   m_ObjectHideFlags: 0

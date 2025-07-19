@@ -4,6 +4,8 @@ namespace KenneyJam.Game.PlayerCar.Modules
 {
     public class SniperModule : CarModule
     {
+        public Transform muzzle;
+
         public override Type GetModuleType()
         {
             return Type.Sniper;

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3961792657187486176}
   m_Layer: 0
-  m_Name: shootAnchorPoint
+  m_Name: muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,8 +95,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: SniperLVL1
       objectReference: {fileID: 0}
+    - target: {fileID: 4075070363321145941, guid: b6a32f1879b4bb44c908d4444bb2909b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.415
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6551238392589077143, guid: b6a32f1879b4bb44c908d4444bb2909b, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b6a32f1879b4bb44c908d4444bb2909b, type: 3}
       insertIndex: -1
@@ -129,3 +134,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 0
+  muzzle: {fileID: 3961792657187486176}
