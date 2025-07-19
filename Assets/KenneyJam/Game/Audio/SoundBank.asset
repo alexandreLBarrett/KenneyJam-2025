@@ -21,3 +21,26 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 10d0010ae3eda044aa3830045205c7a5, type: 3}
   menuMusic: {fileID: 8300000, guid: 11e2c0dcf46dc1747841d485a06359c7, type: 3}
   engineSound: {fileID: 8300000, guid: cabcce76e10f3e64aa1ae572618de67d, type: 3}
+  MatchWon: {fileID: 8300000, guid: 708295e3bebbaa445bfbae484d3a960f, type: 3}
+  MatchLost: {fileID: 8300000, guid: ef17dc46bce48634fbfdaf31e9659b31, type: 3}
+  GameLost: {fileID: 8300000, guid: a76f56ddf22c81e4c994a89dc695b4dd, type: 3}
+  CarBreak: {fileID: 8300000, guid: 847046bad0bf3164ba2b13574d173243, type: 3}
+  CarDamageTaken:
+  - {fileID: 8300000, guid: c7de3a7882ae7534c8d239b39cffcbcf, type: 3}
+  - {fileID: 8300000, guid: 100d8bc51cc7fd34ab4aed7ee8156d2a, type: 3}
+  - {fileID: 8300000, guid: 77d7bfe1ddcadbe41b2ab3445183faa3, type: 3}
+  - {fileID: 8300000, guid: 4ed263cee7a18154682e73107deaaa83, type: 3}
+  - {fileID: 8300000, guid: 9387cf22c7d1b2740965b638ccb77db2, type: 3}
+  - {fileID: 8300000, guid: ea2607059466a3d43967282dd3a70fe8, type: 3}
+  - {fileID: 8300000, guid: f047f52985f19794483c28c40b81b4cd, type: 3}
+  - {fileID: 8300000, guid: 71f48a8b4c405d94e8fdbdc644af5f61, type: 3}
+  - {fileID: 8300000, guid: 8b84532fec5f4bb4f8b6a44bff13467e, type: 3}
+  - {fileID: 8300000, guid: f0b58c15ceeaf96498edc105d0d813e7, type: 3}
+  - {fileID: 8300000, guid: c429d95ee1a38f0408a3b776e4efa097, type: 3}
+  - {fileID: 8300000, guid: 674c43b6b276f7641ab7d4ab95c6bbdc, type: 3}
+  - {fileID: 8300000, guid: 53713cb6f74f9e145a584682a2de5980, type: 3}
+  - {fileID: 8300000, guid: 2210b44be25c9464eba65d83566260ef, type: 3}
+  - {fileID: 8300000, guid: a7be26ae40e77cb41b4c3efb6f35c56e, type: 3}
+  - {fileID: 8300000, guid: 738a4558706e51440aa87da62e5db15c, type: 3}
+  - {fileID: 8300000, guid: 433315c6104f3c54b994eb7c1795a468, type: 3}
+  - {fileID: 8300000, guid: 504acc7901e622048b25416497cdc382, type: 3}

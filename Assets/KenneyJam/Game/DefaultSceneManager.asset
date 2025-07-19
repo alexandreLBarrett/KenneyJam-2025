@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c29192f138cafd1468e7b8c4be50835b, type: 3}
   m_Name: DefaultSceneManager
   m_EditorClassIdentifier: 
+  menuScene: MainMenuScene
   garageScene: GarageScene
   gameScene: MainScene
+  transitionDuration: 0.8
+  PlayerLives: 3

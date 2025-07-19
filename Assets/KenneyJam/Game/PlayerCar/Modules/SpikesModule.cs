@@ -47,7 +47,7 @@ public class SpikesModule : CarModule
             float damage = baseDamage;
             float speed = rb.linearVelocity.magnitude;
             damage += speedScaling * speed / car.stats.maxSpeed;
-            other.GetComponentInParent<CarController>().InflictDamage(damage);
+            other.GetComponentInParent<CarController>().InflictDamage(gameObject.GetComponentInParent<CarController>(), damage);
 
             SoundManager.Instance.PlayInstantSound(spikeSound);
             currentCooldown = cooldown;

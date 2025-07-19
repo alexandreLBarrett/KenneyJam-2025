@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e563fb870642a3c4cae2973a6de231ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ImpulseForce: 20
+  ImpulseForce: 15000
 --- !u!135 &6519714683288299886
 SphereCollider:
   m_ObjectHideFlags: 0

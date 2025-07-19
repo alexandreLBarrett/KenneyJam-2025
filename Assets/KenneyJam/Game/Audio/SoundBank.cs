@@ -10,4 +10,11 @@ public class SoundBank : ScriptableObject
 
     public AudioClip engineSound;
 
+    public AudioClip MatchWon;
+    public AudioClip MatchLost;
+    public AudioClip GameLost;
+    public AudioClip CarBreak;
+
+    public List<AudioClip> CarDamageTaken;
+
 }

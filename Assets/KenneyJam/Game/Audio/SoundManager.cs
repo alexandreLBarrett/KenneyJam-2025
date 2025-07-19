@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -36,6 +37,16 @@ public class SoundManager : MonoBehaviour
 
     private void StartMusicLoop()
     {
+        if (SceneManager.GetActiveScene().path.Contains("Menu") || SceneManager.GetActiveScene().path.Contains("Garage"))
+        {
+            musicSource = Instantiate(audioSourceObject, transform);
+            musicSource.clip = soundBank.menuMusic;
+            musicSource.volume = musicVolume;
+            musicSource.loop = true;
+            musicSource.Play();
+            return;
+        }
+
         for (int i = 0; i < soundBank.gameMusics.Count; i++)
             nextMusicIndices.Add(i);
         Shuffle(nextMusicIndices);
@@ -48,7 +59,7 @@ public class SoundManager : MonoBehaviour
 
     private void Update()
     {
-        if (!musicSource.isPlaying && musicSource.time >= musicSource.clip.length)
+        if (!musicSource.isPlaying && !musicSource.loop && musicSource.time >= musicSource.clip.length)
         {
             if (nextMusicIndices.Count == 0)
             {
@@ -85,6 +96,16 @@ public class SoundManager : MonoBehaviour
         source.volume = volume;
         source.Play();
         Destroy(source, clip.length);
+        return source;
+    }
+    public AudioSource PlayInstantSound(IList<AudioClip> clipBank, float volume=1, float randomPitchAmout=.1f)
+    {
+        AudioSource source = Instantiate(audioSourceObject, transform);
+        source.clip = clipBank[Random.Range(0, clipBank.Count)];
+        source.volume = volume;
+        source.pitch += Random.Range(-randomPitchAmout, +randomPitchAmout);
+        source.Play();
+        Destroy(source, source.clip.length);
         return source;
     }
 }

@@ -10,7 +10,7 @@ public class BouncingPad : MonoBehaviour
         if (collision.body.GetComponentInParent<CarController>() != null)
         {
             Vector3 v = (collision.body.transform.position - transform.position).normalized;
-            //v.y = Mathf.Abs(v.y);
+            v.y = Mathf.Abs(v.y);
             collision.rigidbody.AddForce(v * ImpulseForce, ForceMode.Impulse);
         }
     }
