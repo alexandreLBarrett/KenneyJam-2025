@@ -9,7 +9,7 @@ public class CarSceneManager : MonoBehaviour
 {
     public string menuScene = "MainMenuScene";
     public string garageScene = "GarageScene";
-    public string gameScene = "GameScene";
+    public string gameScene = "MainScene";
     public float transitionDuration = .8f;
 
     public int playerLives;
@@ -63,12 +63,12 @@ public class CarSceneManager : MonoBehaviour
         if (playerLives <= 0)
         {
             SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.GameLost);
-            StartCoroutine(StartLevelTransition(gameScene, 2));
+            StartCoroutine(StartLevelTransition(menuScene, 2));
         }
         else
         {
             SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.MatchLost);
-            StartCoroutine(StartLevelTransition(menuScene, 2));
+            StartCoroutine(StartLevelTransition(gameScene, 2));
         }
     }
 

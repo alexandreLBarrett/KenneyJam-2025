@@ -12,6 +12,8 @@ public class SpikesModule : CarModule
     private Rigidbody rb;
     private CarController car;
 
+    public override float Cooldown => 1;
+
     public override Type GetModuleType()
     {
         return Type.Spikes;
@@ -52,5 +54,10 @@ public class SpikesModule : CarModule
             SoundManager.Instance.PlayInstantSound(spikeSound);
             currentCooldown = cooldown;
         }
+    }
+
+    public override bool CanHitAnyone()
+    {
+        return false;
     }
 }

@@ -28,4 +28,6 @@ public class CarStats : ScriptableObject
 
     [Header("Gameplay")]
     public int maxHealth = 20;
+    public float panickImpulseForce = 20000;
+    public float panickRotationDuration = .9f;
 }

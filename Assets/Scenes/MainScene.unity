@@ -12440,6 +12440,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4735503199533407762, guid: bb15c2e92c9ace44c9c9fc2bbe88e83d, type: 3}
+      propertyPath: livesRemaining1
+      value: 
+      objectReference: {fileID: 5231080960958770603}
+    - target: {fileID: 4735503199533407762, guid: bb15c2e92c9ace44c9c9fc2bbe88e83d, type: 3}
+      propertyPath: livesRemaining2
+      value: 
+      objectReference: {fileID: 5231080960958770602}
+    - target: {fileID: 4735503199533407762, guid: bb15c2e92c9ace44c9c9fc2bbe88e83d, type: 3}
+      propertyPath: livesRemaining3
+      value: 
+      objectReference: {fileID: 5231080960958770601}
     - target: {fileID: 6679512438098978617, guid: bb15c2e92c9ace44c9c9fc2bbe88e83d, type: 3}
       propertyPath: m_Camera
       value: 
@@ -12453,6 +12465,21 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb15c2e92c9ace44c9c9fc2bbe88e83d, type: 3}
+--- !u!1 &5231080960958770601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2900458393473103364, guid: bb15c2e92c9ace44c9c9fc2bbe88e83d, type: 3}
+  m_PrefabInstance: {fileID: 5231080960958770600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5231080960958770602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 604982389104471474, guid: bb15c2e92c9ace44c9c9fc2bbe88e83d, type: 3}
+  m_PrefabInstance: {fileID: 5231080960958770600}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5231080960958770603 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2664783606603434197, guid: bb15c2e92c9ace44c9c9fc2bbe88e83d, type: 3}
+  m_PrefabInstance: {fileID: 5231080960958770600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
