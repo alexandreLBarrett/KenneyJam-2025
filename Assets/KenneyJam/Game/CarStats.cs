@@ -8,7 +8,7 @@ public class CarStats : ScriptableObject
     public float maxSpeed = 50f;
     public float brakeForce = 20f;
     public float reverseForce = 7.5f;
-    public float turnTorque = 1700f;
+    public float turnTorque = 1100f;
     public float maxTurnSpeed = 1250f;
 
     [Header("Physics")]
