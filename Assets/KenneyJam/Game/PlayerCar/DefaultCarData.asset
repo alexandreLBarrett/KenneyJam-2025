@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac1cc12be7a74669af55079e19384809, type: 3}
   m_Name: DefaultCarData
   m_EditorClassIdentifier: 
-  moduleDesc: []
+  moduleDesc:
+  - moduleSlot: 0
+    type: 2
+    level: 0
   frame: {fileID: 8066831284391393388, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}

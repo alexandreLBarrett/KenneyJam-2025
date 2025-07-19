@@ -27,7 +27,7 @@ SubShader {
 
     LOD 100
  
-    ZWrite On
+    ZWrite Off
  
     Pass {
         CGPROGRAM

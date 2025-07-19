@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b8c6c7f14bfa64fb2dc65bbacd6436, type: 3}
+  m_Name: SoundBank
+  m_EditorClassIdentifier: 
+  gameMusics:
+  - {fileID: 8300000, guid: 507b592db5a6a4b4a8caba09c4a95ff8, type: 3}
+  - {fileID: 8300000, guid: 35af7fb6debf4aa44844e7b1fb1cc1dc, type: 3}
+  - {fileID: 8300000, guid: 9fc84d9fbe1cfa146809a458f6f7caea, type: 3}
+  - {fileID: 8300000, guid: dcc6924e976d75f42927ed72727ed796, type: 3}
+  - {fileID: 8300000, guid: 57674a89aeafbf246882db71b6c3f059, type: 3}
+  - {fileID: 8300000, guid: 10d0010ae3eda044aa3830045205c7a5, type: 3}
+  menuMusic: {fileID: 8300000, guid: 11e2c0dcf46dc1747841d485a06359c7, type: 3}
+  engineSound: {fileID: 8300000, guid: cabcce76e10f3e64aa1ae572618de67d, type: 3}

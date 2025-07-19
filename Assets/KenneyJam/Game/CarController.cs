@@ -15,6 +15,9 @@ public class CarController : MonoBehaviour
     public UnityEvent<float /* damage */, CarController /* car */> onDamageTaken;
     public UnityEvent<float/*health*/, float/*maxHealth*/> onHealthChanged;
 
+    private AudioSource engineAudioSource;
+    private float lerpedEngineVolume = .05f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,6 +50,27 @@ public class CarController : MonoBehaviour
         x = Mathf.Clamp01((x - edge0) / (edge1 - edge0));
 
         return x * x * (3.0f - 2.0f * x);
+    }
+
+    private void FixedUpdate()
+    {
+        if (engineAudioSource == null)
+        {
+            if (Time.timeSinceLevelLoad > .8)
+                engineAudioSource = SoundManager.Instance.CreatePermanentAudioSource(SoundManager.Instance.soundBank.engineSound);
+            else
+                return;
+        }
+        lerpedEngineVolume = Mathf.Lerp(lerpedEngineVolume, Mathf.Clamp01(
+            Mathf.Max(Mathf.Abs(currentSpeed) / stats.maxSpeed * stats.engineVolumeLinearVelocityFactor, rb.angularVelocity.magnitude * stats.engineVolumeAngularVelocityFactor)),
+            stats.engineVolumeLerp);
+        engineAudioSource.volume = lerpedEngineVolume * stats.engineGlobalVolume;
+        engineAudioSource.pitch = 1 + lerpedEngineVolume * .3f - .15f;
+    }
+
+    private void OnDestroy()
+    {
+        SoundManager.Instance.FadeOutPermanentAudioSource(engineAudioSource);
     }
 
     public void UpdateMovement(float engineInput, float steeringInput)
