@@ -10,15 +10,19 @@ public class RailgunLaser : MonoBehaviour
     private float currentTime = 0;
 
     private LineRenderer lineRenderer;
+    private ParticleSystem particleSystem;
 
     void Awake()
     {
         lineRenderer = GetComponentInChildren<LineRenderer>();
+        particleSystem = GetComponent<ParticleSystem>();
+        particleSystem.startLifetime = totalLifespan;
     }
 
     void Start()
     {
     }
+
     float Smoothstep(float edge0, float edge1, float x)
     {
         // Scale, and clamp x to 0..1 range
