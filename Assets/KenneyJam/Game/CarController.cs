@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 public class CarController : MonoBehaviour
 {
@@ -50,6 +51,22 @@ public class CarController : MonoBehaviour
 
     public void UpdateMovement(float engineInput, float steeringInput)
     {
+        Transform rootTransform = transform.root;
+        // OverlapBox below the car to check if wheels are still on the ground.
+        Collider[] cols = Physics.OverlapBox(transform.position + new Vector3(0.07f / 8.0f, 0, 0.175f / 8.0f), new(0.07f, 0.01f, 0.175f), rootTransform.rotation);
+        List<Collider> actualCols = new();
+        foreach (Collider col in cols)
+        {
+            if (col.transform.root.gameObject != transform.root.gameObject)
+            {
+                actualCols.Add(col);
+            }
+        }
+        if (actualCols.Count == 0)
+        {
+            return;
+        }
+
         currentSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
         
         // Accelerate (when either turning or when moving forwards)
@@ -69,7 +86,7 @@ public class CarController : MonoBehaviour
         }
 
         // Steering
-        if (Mathf.Abs(steeringInput) > 0.1f)
+        if (Mathf.Abs(steeringInput) > 0.05f)
         {
             float turnForce = Mathf.Sign(steeringInput) * stats.turningMotorCurve.Evaluate(engineInput) * stats.turnTorque;
 

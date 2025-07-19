@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b156fa751db93d4e8e23aee671555aa, type: 3}
   m_Name: DefaultCarStats
   m_EditorClassIdentifier: 
-  acceleration: 2
-  maxSpeed: 10
-  brakeForce: 3
-  reverseForce: 1.5
-  turnTorque: 375
-  maxTurnSpeed: 250
+  acceleration: 25
+  maxSpeed: 30
+  brakeForce: 25
+  reverseForce: 18
+  turnTorque: 7000
+  maxTurnSpeed: 4550
   turnSmoothingEdge1: -0.1
   turnSmoothingEdge2: 0.1
   turningMotorCurve:
@@ -73,6 +73,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   mass: 2000
   linearDamping: 5
-  angularDamping: 3
+  angularDamping: 2
   carName: Default Car
   maxHealth: 20
