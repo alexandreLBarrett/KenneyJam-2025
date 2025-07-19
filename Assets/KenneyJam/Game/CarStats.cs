@@ -18,4 +18,7 @@ public class CarStats : ScriptableObject
 
     [Header("Visual/Audio")]
     public string carName = "Default Car";
+
+    [Header("Gameplay")]
+    public int maxHealth = 20;
 }

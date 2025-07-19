@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CarController : MonoBehaviour
 {
@@ -6,6 +7,10 @@ public class CarController : MonoBehaviour
 
     private Rigidbody rb;
     private float currentSpeed;
+
+    private float carHealth;
+
+    public UnityEvent<float/*health*/, float/*maxHealth*/> onHealthChanged;
 
     void Awake()
     {
@@ -22,6 +27,8 @@ public class CarController : MonoBehaviour
     void Start()
     {
         InitializePhysicsWithStats();
+
+        carHealth = stats.maxHealth;
     }
 
     private void InitializePhysicsWithStats()
@@ -65,5 +72,11 @@ public class CarController : MonoBehaviour
 
             rb.AddTorque(0, turnForce, 0, ForceMode.Force);
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // TODO play sound
+        //Debug.Log(collision.gameObject.name + " " + collision.impulse + " " + collision.relativeVelocity);
     }
 }
