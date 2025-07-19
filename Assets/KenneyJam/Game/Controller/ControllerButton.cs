@@ -19,7 +19,7 @@ public class ControllerButton : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         if (objectToToggle != null)
         {
             objectToToggle.SetActive(false);
-            Gamepad.OnButtonPressed[GamepadButton].Invoke();
+            Gamepad.OnButtonPressed.Invoke(GamepadButton);
         }
     }
 

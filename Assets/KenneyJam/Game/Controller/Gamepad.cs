@@ -1,10 +1,11 @@
+using KenneyJam.Game.PlayerCar;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Gamepad : MonoBehaviour
 {
-    public List<UnityEvent> OnButtonPressed;
+    public UnityEvent<int> OnButtonPressed;
     public UnityEvent<float, float> OnJoystickMoved = new UnityEvent<float, float>();
 
     private float _JoystickX = 0, _JoystickY = 0;
@@ -13,9 +14,7 @@ public class Gamepad : MonoBehaviour
 
     Gamepad()
     {
-        OnButtonPressed = new List<UnityEvent>();
-        for (int i = 0; i < 5; i++)
-            OnButtonPressed.Add(new UnityEvent());
+        OnButtonPressed = new();
         OnJoystickMoved.AddListener(OnJosystickMovedCallback);
     }
 

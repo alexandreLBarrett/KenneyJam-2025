@@ -25,6 +25,22 @@ public class PlayerCarController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        gamepad.OnButtonPressed.AddListener(OnButtonPressed);
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < activateModuleActions.Count; ++i)
+        {
+            if (activateModuleActions[i].triggered)
+            {
+                OnButtonPressed(i);
+            }
+        }
+    }
+
     void FixedUpdate()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
@@ -34,13 +50,10 @@ public class PlayerCarController : MonoBehaviour
             moveValue.y += gamepad.JoystickY;
         }
         carController.UpdateMovement(moveValue.y, moveValue.x);
+    }
 
-        for (int i = 0; i < activateModuleActions.Count; ++i)
-        {
-            if (activateModuleActions[i].triggered)
-            {
-                modularCar.ActivateModule((CarModuleSlot)i);    
-            }
-        }
+    void OnButtonPressed(int buttonIndex)
+    {
+        modularCar.ActivateModule((CarModuleSlot) buttonIndex);
     }
 }

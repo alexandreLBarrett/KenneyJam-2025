@@ -26,7 +26,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
                 }
             }
             RailgunLaser laser = Instantiate(laserVFXPrefab, muzzleTransform).GetComponent<RailgunLaser>();
-            laser.SetupVFXPosition(hit.point);
+            laser.SetupVFXPosition(hit.collider != null ? hit.point : muzzleTransform.position + muzzleTransform.forward * 10.0f);
         }
     }
 }
