@@ -24,7 +24,7 @@ public class CarStats : ScriptableObject
     public float engineVolumeLinearVelocityFactor = 1;
     public float engineVolumeAngularVelocityFactor = 1;
     public float engineVolumeLerp = .05f;
-    public float engineGlobalVolue = .3f;
+    public float engineGlobalVolume = .3f;
 
     [Header("Gameplay")]
     public int maxHealth = 20;

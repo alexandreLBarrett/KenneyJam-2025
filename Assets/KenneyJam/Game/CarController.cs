@@ -33,7 +33,6 @@ public class CarController : MonoBehaviour
     {
         InitializePhysicsWithStats();
 
-        engineAudioSource = SoundManager.Instance.CreatePermanentAudioSource(SoundManager.Instance.soundBank.engineSound);
         currentHealth = stats.maxHealth;
     }
 
@@ -54,10 +53,17 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (engineAudioSource == null)
+        {
+            if (Time.timeSinceLevelLoad > .8)
+                engineAudioSource = SoundManager.Instance.CreatePermanentAudioSource(SoundManager.Instance.soundBank.engineSound);
+            else
+                return;
+        }
         lerpedEngineVolume = Mathf.Lerp(lerpedEngineVolume, Mathf.Clamp01(
             Mathf.Max(Mathf.Abs(currentSpeed) / stats.maxSpeed * stats.engineVolumeLinearVelocityFactor, rb.angularVelocity.magnitude * stats.engineVolumeAngularVelocityFactor)),
-            stats.engineGlobalVolue);
-        engineAudioSource.volume = lerpedEngineVolume;
+            stats.engineVolumeLerp);
+        engineAudioSource.volume = lerpedEngineVolume * stats.engineGlobalVolume;
         engineAudioSource.pitch = 1 + lerpedEngineVolume * .3f - .15f;
     }
 

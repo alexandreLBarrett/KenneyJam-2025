@@ -25,7 +25,7 @@ public class PlayerCarController : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
         if (gamepad != null)
