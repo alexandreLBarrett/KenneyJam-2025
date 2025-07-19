@@ -87,4 +87,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e882b0022a762684e92c4e3a7a5421fe, type: 2}
-  carFrame: {fileID: 4676624343508298828, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}
+  carFramePrefab: {fileID: 4676624343508298828, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}
