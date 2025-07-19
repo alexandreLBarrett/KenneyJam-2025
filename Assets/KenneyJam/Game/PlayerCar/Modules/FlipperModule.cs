@@ -41,7 +41,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
                 return;
             }
 
-            animator.SetTrigger("Flip");
+            // Detection logic
             List<string> foundCars = new(); 
             Collider[] cols = Physics.OverlapBox(
                 transform.TransformPoint(boxCollider.center), // Convert local center to world space
@@ -58,8 +58,11 @@ namespace KenneyJam.Game.PlayerCar.Modules
                     foundCars.Add(col.gameObject.name);
                 }
             }
-
+            
+            // Effects
+            animator.SetTrigger("Flip");
             SoundManager.Instance.PlayInstantSound(flipSound);
+            
             currentCooldown = cooldown;
         }
     }

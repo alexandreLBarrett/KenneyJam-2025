@@ -130,6 +130,7 @@ public class CarController : MonoBehaviour
 
     public void InflictDamage(float damageValue)
     {
+        // TODO: could play different sound if armor > 0
         currentHealth = currentHealth - Mathf.Max(damageValue - modularCar.GetArmorValue(), 0);
         onDamageTaken.Invoke(currentHealth, this);
         if (currentHealth < 0)
