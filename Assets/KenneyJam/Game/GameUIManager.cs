@@ -19,10 +19,10 @@ public class GameUIManager : MonoBehaviour
     {
         this.controller = controller;
         controller.onHealthChanged.AddListener(OnHealthChangedCallback);
-        livesRemaining1.SetActive(CarSceneManager.Instance.PlayerLives >= 1);
-        livesRemaining2.SetActive(CarSceneManager.Instance.PlayerLives >= 2);
-        livesRemaining3.SetActive(CarSceneManager.Instance.PlayerLives >= 3);
-        victoriesText.text = CarSceneManager.Instance.GamesWon.ToString();
+        livesRemaining1.SetActive(CarSceneManager.Instance.playerLives >= 1);
+        livesRemaining2.SetActive(CarSceneManager.Instance.playerLives >= 2);
+        livesRemaining3.SetActive(CarSceneManager.Instance.playerLives >= 3);
+        victoriesText.text = CarSceneManager.Instance.currentMatch.ToString();
     }
 
     void OnHealthChangedCallback(float health, float maxHealth)

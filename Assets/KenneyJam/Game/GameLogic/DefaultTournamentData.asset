@@ -15,7 +15,11 @@ MonoBehaviour:
   startingCurrency: 2
   startingLives: 3
   matches:
-  - currencyRewardPerPlace: 03000000020000000100000000000000
+  - currencyReward: 2
     playerCount: 4
-  - currencyRewardPerPlace: 04000000030000000200000001000000
+  - currencyReward: 4
     playerCount: 4
+  - currencyReward: 8
+    playerCount: 4
+  - currencyReward: 100000
+    playerCount: 2
