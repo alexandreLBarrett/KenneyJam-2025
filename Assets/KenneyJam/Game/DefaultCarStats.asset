@@ -16,7 +16,7 @@ MonoBehaviour:
   maxSpeed: 10
   brakeForce: 3
   reverseForce: 1.5
-  turnTorque: 355
+  turnTorque: 375
   maxTurnSpeed: 250
   turnSmoothingEdge1: -0.1
   turnSmoothingEdge2: 0.1
@@ -26,15 +26,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: -1
       value: 0.5
-      inSlope: 0.51248235
-      outSlope: 0.51248235
+      inSlope: 1.8030678
+      outSlope: 1.8030678
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: -0.414614
-      value: 0.8
+      time: -0.7251761
+      value: 0.99552613
       inSlope: 0.41451403
       outSlope: 0.41451403
       tangentMode: 0
@@ -42,8 +42,8 @@ MonoBehaviour:
       inWeight: 0.27849275
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: -0.018826708
-      value: 1.0023346
+      time: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -51,8 +51,8 @@ MonoBehaviour:
       inWeight: 0.2421278
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.414614
-      value: 0.8
+      time: 0.6319907
+      value: 0.9985016
       inSlope: -0.39268315
       outSlope: -0.39268315
       tangentMode: 0
@@ -62,8 +62,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 0.5
-      inSlope: -0.51248235
-      outSlope: -0.51248235
+      inSlope: -1.3545896
+      outSlope: -1.3545896
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -54,7 +55,7 @@ public class CarController : MonoBehaviour
         // Accelerate (when either turning or when moving forwards)
         if (currentSpeed < stats.maxSpeed && (engineInput > 0.001f || Mathf.Abs(steeringInput) > 0.1f))
         {
-            rb.AddForce(Mathf.Max(engineInput, Mathf.Abs(steeringInput)) * Mathf.Sign(engineInput) * stats.acceleration * transform.forward, ForceMode.Acceleration);
+            rb.AddForce(Mathf.Max(Mathf.Abs(engineInput), Mathf.Abs(steeringInput)) * Mathf.Sign(engineInput) * stats.acceleration * transform.forward, ForceMode.Acceleration);
         }
         // Brake
         else if (currentSpeed > 0 && engineInput < -0.001f)
@@ -72,13 +73,13 @@ public class CarController : MonoBehaviour
         {
             float turnForce = Mathf.Sign(steeringInput) * stats.turningMotorCurve.Evaluate(engineInput) * stats.turnTorque;
 
-            //// Stop the car from spinning out (reduce turn force when moving slowly).
-            //float speedTurnMask = Smoothstep(stats.turnSmoothingEdge1, stats.turnSmoothingEdge2, Mathf.Abs(currentSpeed) / stats.maxSpeed);
-            //turnForce *= speedTurnMask;
+            // Stop the car from spinning out (reduce turn force when moving slowly).
+            float speedTurnMask = Smoothstep(stats.turnSmoothingEdge1, stats.turnSmoothingEdge2, Mathf.Abs(currentSpeed) / stats.maxSpeed);
+            turnForce *= speedTurnMask;
 
             // Clamp the turning speed to the max.
             turnForce = Mathf.Sign(steeringInput) * Mathf.Clamp(Mathf.Abs(turnForce), 0f, stats.maxTurnSpeed);
-            //turnForce *= Mathf.Sign(currentSpeed);
+            turnForce *= Mathf.Sign(currentSpeed);
 
             rb.AddTorque(0, turnForce, 0, ForceMode.Force);
         }
