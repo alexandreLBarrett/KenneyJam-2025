@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using KenneyJam.Game.PlayerCar;
 
 public class CarController : MonoBehaviour
 {
@@ -17,10 +18,12 @@ public class CarController : MonoBehaviour
 
     private AudioSource engineAudioSource;
     private float lerpedEngineVolume = .05f;
+    private ModularCar modularCar;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        modularCar = GetComponent<ModularCar>();
 
         // Fallback to default
         if (stats == null)
@@ -56,6 +59,7 @@ public class CarController : MonoBehaviour
         rb.linearDamping = stats.linearDamping;
         rb.angularDamping = stats.angularDamping;
     }
+
     float Smoothstep(float edge0, float edge1, float x)
     {
         // Scale, and clamp x to 0..1 range
@@ -63,7 +67,6 @@ public class CarController : MonoBehaviour
 
         return x * x * (3.0f - 2.0f * x);
     }
-
     private void FixedUpdate()
     {
         if (engineAudioSource == null)
@@ -87,9 +90,8 @@ public class CarController : MonoBehaviour
 
     public void UpdateMovement(float engineInput, float steeringInput)
     {
-        Transform rootTransform = transform.root;
         // OverlapBox below the car to check if wheels are still on the ground.
-        Collider[] cols = Physics.OverlapBox(transform.position + new Vector3(0.07f / 8.0f, 0, 0.175f / 8.0f), new(0.07f, 0.01f, 0.175f), rootTransform.rotation);
+        Collider[] cols = Physics.OverlapBox(transform.position + new Vector3(0.07f / 8.0f, 0, 0.07f / 8.0f), new(0.07f, 0.01f, 0.07f), transform.rotation);
         List<Collider> actualCols = new();
         foreach (Collider col in cols)
         {
@@ -140,7 +142,7 @@ public class CarController : MonoBehaviour
 
     public void InflictDamage(CarController damageDealer, float damageValue)
     {
-        currentHealth -= damageValue;
+        currentHealth = currentHealth - Mathf.Max(damageValue - modularCar.GetArmorValue(), 0);
         onDamageTaken.Invoke(currentHealth, damageDealer);
         onHealthChanged.Invoke(currentHealth, stats.maxHealth);
         if (currentHealth <= 0)

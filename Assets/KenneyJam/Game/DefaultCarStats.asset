@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultCarStats
   m_EditorClassIdentifier: 
   acceleration: 25
-  maxSpeed: 30
+  maxSpeed: 35
   brakeForce: 25
   reverseForce: 18
   turnTorque: 7000
@@ -78,5 +78,5 @@ MonoBehaviour:
   engineVolumeLinearVelocityFactor: 1
   engineVolumeAngularVelocityFactor: 1
   engineVolumeLerp: 0.05
-  engineGlobalVolume: 0.3
+  engineGlobalVolume: 0.03
   maxHealth: 20

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.Serialization;
+using KenneyJam.Game.PlayerCar.Modules;
 
 namespace KenneyJam.Game.PlayerCar
 {
@@ -22,17 +23,17 @@ namespace KenneyJam.Game.PlayerCar
         public CarModule.Type type;
         public CarModule.Level level;
     }
-    
+
     public class ModularCar : MonoBehaviour
     {
         public CarDataPreset preset;
 
         public CarModulesData modulesDB;
-        
+
         // Runtime data on the car itself
         private Dictionary<CarModuleSlot, CarModule> modules = new();
         private CarFrame carFrame;
-        
+
         private CarFrame currentFrameInsance;
         private PersistentCarData persistentData;
 
@@ -146,6 +147,19 @@ namespace KenneyJam.Game.PlayerCar
             {
                 mod.Activate();
             }
+        }
+
+        public float GetArmorValue()
+        {
+            float armorValue = 0;
+            foreach (CarModule module in modules.Values)
+            {
+                if (module.GetModuleType() == CarModule.Type.Armor)
+                {
+                    armorValue += (module as ArmorModule).armorValue;
+                }
+            }
+            return armorValue;
         }
 
         private void OnDestroy()

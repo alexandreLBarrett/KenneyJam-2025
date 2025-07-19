@@ -132,4 +132,4 @@ MonoBehaviour:
   level: 1
   muzzle: {fileID: 6419201743694619696}
   laserVFXPrefab: {fileID: 6406467276572713763, guid: d0fc759c0ba064f428b51c424ef850a5, type: 3}
-  damage: 2
+  damage: 5
