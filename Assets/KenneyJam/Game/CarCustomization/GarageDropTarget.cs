@@ -1,4 +1,5 @@
 using KenneyJam.Game.PlayerCar;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,25 +11,46 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
     public Button destroyButton;
 
     private ModularCar car;
+    private TMP_Text upgradeText;
+
+    private string initialUpgradeText;
 
     public void Start()
     {
+        upgradeText = GetComponentInChildren<TMP_Text>();
+        initialUpgradeText = upgradeText.text;
+
         car = FindAnyObjectByType<ModularCar>();
         CarModule module = car.GetModuleInSlot(targetSlot);
         
         upgradeButton.onClick.AddListener(Upgrade);
         upgradeButton.enabled = module && module.level == CarModule.Level.LVL1;
         upgradeButton.gameObject.SetActive(upgradeButton.enabled);
+        if (module && module.level == CarModule.Level.LVL1)
+        {
+            upgradeText.text = initialUpgradeText + " (" + car.GetUpgradeCost(module.GetModuleType()).ToString() + "$)";
+        }
 
         destroyButton.onClick.AddListener(Destroy);
         destroyButton.enabled = module != null;
         destroyButton.gameObject.SetActive(destroyButton.enabled);
     }
 
-    private void Update()
+    void Update()
     {
         Vector2 screenPoint = Camera.main.WorldToScreenPoint(car.GetAnchorForSlot(targetSlot).transform.position);
         transform.position = screenPoint;
+
+        CarModule module = car.GetModuleInSlot(targetSlot);
+        if (!module || module.level == CarModule.Level.LVL2) return;
+        if (CarSceneManager.Instance.playerCurrency < car.GetUpgradeCost(module.GetModuleType()))
+        {
+            upgradeButton.image.color = Color.red;
+        }
+        else
+        {
+            upgradeButton.image.color = Color.white;
+        }
     }
 
     // Upgrades the module to lvl2
@@ -91,6 +113,7 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
         
         upgradeButton.enabled = true;
         upgradeButton.gameObject.SetActive(upgradeButton.enabled);
+        upgradeText.text = initialUpgradeText + " (" + car.GetUpgradeCost(origin.type).ToString() + "$)";
 
         destroyButton.enabled = true;
         destroyButton.gameObject.SetActive(destroyButton.enabled);
