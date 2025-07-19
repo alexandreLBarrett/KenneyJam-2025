@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using KenneyJam.Game.PlayerCar;
 
 public class CarController : MonoBehaviour
 {
@@ -17,10 +18,12 @@ public class CarController : MonoBehaviour
 
     private AudioSource engineAudioSource;
     private float lerpedEngineVolume = .05f;
+    private ModularCar modularCar;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        modularCar = GetComponent<ModularCar>();
 
         // Fallback to default
         if (stats == null)
@@ -127,7 +130,7 @@ public class CarController : MonoBehaviour
 
     public void InflictDamage(float damageValue)
     {
-        currentHealth -= damageValue;
+        currentHealth = currentHealth - Mathf.Max(damageValue - modularCar.GetArmorValue(), 0);
         onDamageTaken.Invoke(currentHealth, this);
         if (currentHealth < 0)
         {

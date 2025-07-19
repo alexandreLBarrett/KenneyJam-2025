@@ -2,6 +2,8 @@
 {
     public class ArmorModule : CarModule
     {
+        public float armorValue = 0.3f;
+
         public override Type GetModuleType()
         {
             return Type.Armor;
