@@ -24,6 +24,10 @@ public class RailgunLaser : MonoBehaviour
 
     void Start()
     {
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.SetPositions(new[] { transform.position, transform.position + transform.forward * 10.0f });
+        // This component is spawned with a parent for its initial position. Now that that is determined, we detach.
+        transform.SetParent(null);
     }
 
     float Smoothstep(float edge0, float edge1, float x)
@@ -39,10 +43,9 @@ public class RailgunLaser : MonoBehaviour
         currentTime += Time.deltaTime;
         if (currentTime > totalLifespan)
         {
-            // Laser done firing, kill.
-            //Destroy(gameObject);
-            //return;
-            currentTime = 0;
+            // Laser is done firing, die.
+            Destroy(gameObject);
+            return;
         }
 
         // [0, totalLifespan] to [0, 1]

@@ -7,11 +7,11 @@ namespace KenneyJam.Game.PlayerCar
 {
     public enum CarModuleSlot
     {
-        Front,
-        FrontLeft,
-        FrontRight,
-        BackLeft,
-        BackRight
+        Front = 0,
+        FrontLeft = 1,
+        FrontRight = 2,
+        BackLeft = 3,
+        BackRight = 4,
     }
     
     [Serializable]
@@ -57,6 +57,15 @@ namespace KenneyJam.Game.PlayerCar
             foreach (var anchorPair in anchors)
             {
                 SpawnCarPart(anchorPair.moduleSlot, anchorPair.gameObject);
+            }
+        }
+
+        public void ActivateModule(CarModuleSlot moduleSlot)
+        {
+            CarModule mod = modules[moduleSlot];
+            if (mod != null)
+            {
+                mod.Activate();
             }
         }
     }

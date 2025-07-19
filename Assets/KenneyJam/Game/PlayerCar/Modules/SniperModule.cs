@@ -5,6 +5,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
     public class SniperModule : CarModule
     {
         public Transform muzzle;
+        public GameObject laserVFXPrefab;
 
         public override Type GetModuleType()
         {
@@ -13,7 +14,16 @@ namespace KenneyJam.Game.PlayerCar.Modules
 
         public override void Activate()
         {
-            //Physics.Raycast()
+            Transform muzzleTransform = muzzle.transform;
+            RailgunLaser laser = Instantiate(laserVFXPrefab, muzzleTransform).GetComponent<RailgunLaser>();
+            if (Physics.Raycast(muzzleTransform.position, muzzleTransform.forward, out RaycastHit hit, 10000.0f))
+            {
+                Debug.Log("An hit was registered on " + hit.collider.gameObject.name + ".");
+                if (hit.collider.CompareTag("Car"))
+                {
+                    Debug.Log("An actual hit was registered on " + hit.collider.gameObject.name + "!");
+                }
+            }
         }
     }
 }

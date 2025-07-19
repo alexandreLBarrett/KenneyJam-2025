@@ -2,7 +2,6 @@
 
 namespace KenneyJam.Game.PlayerCar
 {
-    
     public abstract class CarModule : MonoBehaviour
     {
         public enum Type
