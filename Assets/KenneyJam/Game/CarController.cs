@@ -13,7 +13,7 @@ public class CarController : MonoBehaviour
     public float currentHealth;
 
     public UnityEvent<Transform /* carTransform */> onCarDeath;
-    public UnityEvent<float /* damage */, CarController /* damageDealer */> onDamageTaken;
+    public UnityEvent<float /* damage */, CarController /* damageDealer */, bool /* shouldPlaySound */> onDamageTaken;
     public UnityEvent<float/*health*/, float/*maxHealth*/> onHealthChanged;
 
     private AudioSource engineAudioSource;
@@ -39,15 +39,15 @@ public class CarController : MonoBehaviour
 
         currentHealth = stats.maxHealth;
 
-        onDamageTaken.AddListener((damage,damageDealer) => {
+        onDamageTaken.AddListener((damage, damageDealer, playHitSound) => {
             if (currentHealth <= 0)
             {
                 SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.CarBreak);
                 rb.AddForce(((transform.position - damageDealer.transform.position).normalized + Vector3.up) * 50000, ForceMode.Impulse);
             }
-            else
+            else if (playHitSound)
             {
-                SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.CarDamageTaken, .5f);
+                SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.CarDamageTaken, .3f);
             }
         });
     }
@@ -140,10 +140,10 @@ public class CarController : MonoBehaviour
         }
     }
 
-    public void InflictDamage(CarController damageDealer, float damageValue)
+    public void InflictDamage(CarController damageDealer, float damageValue, bool playHitSound = true)
     {
         currentHealth = currentHealth - Mathf.Max(damageValue - modularCar.GetArmorValue(), 0);
-        onDamageTaken.Invoke(currentHealth, damageDealer);
+        onDamageTaken.Invoke(currentHealth, damageDealer, playHitSound);
         onHealthChanged.Invoke(currentHealth, stats.maxHealth);
         if (currentHealth <= 0)
         {
