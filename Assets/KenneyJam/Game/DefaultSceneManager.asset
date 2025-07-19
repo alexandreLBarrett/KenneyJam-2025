@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   garageScene: GarageScene
   gameScene: MainScene
+  transitionDuration: 0.8

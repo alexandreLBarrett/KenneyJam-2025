@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
@@ -36,6 +37,16 @@ public class SoundManager : MonoBehaviour
 
     private void StartMusicLoop()
     {
+        if (SceneManager.GetActiveScene().path.Contains("Menu"))
+        {
+            musicSource = Instantiate(audioSourceObject, transform);
+            musicSource.clip = soundBank.menuMusic;
+            musicSource.volume = musicVolume;
+            musicSource.loop = true;
+            musicSource.Play();
+            return;
+        }
+
         for (int i = 0; i < soundBank.gameMusics.Count; i++)
             nextMusicIndices.Add(i);
         Shuffle(nextMusicIndices);
@@ -48,7 +59,7 @@ public class SoundManager : MonoBehaviour
 
     private void Update()
     {
-        if (!musicSource.isPlaying && musicSource.time >= musicSource.clip.length)
+        if (!musicSource.isPlaying && !musicSource.loop && musicSource.time >= musicSource.clip.length)
         {
             if (nextMusicIndices.Count == 0)
             {

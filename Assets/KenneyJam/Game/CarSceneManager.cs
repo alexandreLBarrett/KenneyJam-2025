@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,14 +7,31 @@ public class CarSceneManager : ScriptableObject
 {
     public string garageScene;
     public string gameScene;
-    
+    public float transitionDuration = .5f;
+
     public void LoadGarage()
     {
-        SceneManager.LoadScene(garageScene);
+        FindAnyObjectByType<MonoBehaviour>().StartCoroutine(StartLevelTransition(garageScene));
     }
     
     public void LoadGame()
     {
-        SceneManager.LoadScene(gameScene);
+        FindAnyObjectByType<MonoBehaviour>().StartCoroutine(StartLevelTransition(gameScene));
     }
+
+    private IEnumerator StartLevelTransition(string toScene)
+    {
+        var transitionPanel = GameObject.FindGameObjectsWithTag("MenuTransition");
+        if (transitionPanel.Length == 1)
+        {
+            var animator = transitionPanel[0].GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetTrigger("StartFadeOut");
+                yield return new WaitForSeconds(transitionDuration);
+            }
+        }
+        SceneManager.LoadScene(toScene);
+    }
+
 }
