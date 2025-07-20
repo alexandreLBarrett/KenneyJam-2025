@@ -78,7 +78,8 @@ namespace KenneyJam.Game.PlayerCar.Modules
         private void OnTriggerEnter(Collider other)
         {
             CarController car = other.gameObject.GetComponentInParent<CarController>();
-            if (car && other.gameObject.CompareTag("Car"))
+            CarController myCar = GetComponentInParent<CarController>();
+            if (car && other.gameObject.CompareTag("Car") && car != myCar)
             {
                 collidingCars[car] = other;
             }
@@ -87,7 +88,8 @@ namespace KenneyJam.Game.PlayerCar.Modules
         public void OnTriggerExit(Collider other)
         {
             CarController car = other.gameObject.GetComponentInParent<CarController>();
-            if (car && other.gameObject.CompareTag("Car"))
+            CarController myCar = GetComponentInParent<CarController>();
+            if (car && other.gameObject.CompareTag("Car") && car != myCar)
             {
                 collidingCars.Remove(car);
             }
