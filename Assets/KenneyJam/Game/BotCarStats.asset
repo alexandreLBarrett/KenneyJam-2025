@@ -79,6 +79,6 @@ MonoBehaviour:
   engineVolumeAngularVelocityFactor: 1
   engineVolumeLerp: 0.05
   engineGlobalVolume: 0.03
-  maxHealth: 10
+  maxHealth: 20
   panickImpulseForce: 500000
   panickRotationDuration: 0.9
