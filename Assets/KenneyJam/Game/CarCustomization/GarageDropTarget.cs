@@ -1,14 +1,17 @@
+using System;
 using KenneyJam.Game.PlayerCar;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GarageDropTarget : MonoBehaviour, IDropHandler
+public class GarageDropTarget : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
     public CarModuleSlot targetSlot;
     public Button upgradeButton;
     public Button destroyButton;
+    public TMP_Text moduleName;
+    public Image dropTarget;
 
     private ModularCar car;
     private TMP_Text upgradeText;
@@ -34,6 +37,9 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
         destroyButton.onClick.AddListener(Destroy);
         destroyButton.enabled = module != null;
         destroyButton.gameObject.SetActive(destroyButton.enabled);
+
+        dropTarget = GetComponent<Image>();
+        dropTarget.color = Color.grey;
     }
 
     void Update()
@@ -42,14 +48,27 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
         transform.position = screenPoint;
 
         CarModule module = car.GetModuleInSlot(targetSlot);
-        if (!module || module.level == CarModule.Level.LVL2) return;
+        if (module)
+        {
+            UpdateName(module.level, module.GetModuleType());
+        }
+        else
+        {
+            moduleName.text = "";
+        }
+        
+        if (!module || module.level == CarModule.Level.LVL2)
+        {
+            return;
+        }
+        
         if (CarSceneManager.Instance.playerCurrency < car.GetUpgradeCost(module.GetModuleType()))
         {
             upgradeButton.image.color = Color.red;
         }
         else
         {
-            upgradeButton.image.color = Color.white;
+            upgradeButton.image.color = Color.mediumSeaGreen;
         }
     }
 
@@ -87,6 +106,13 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
         destroyButton.gameObject.SetActive(destroyButton.enabled);
     }
 
+    void UpdateName(CarModule.Level level, CarModule.Type type)
+    {
+        string lvlLabel = level.ToString();
+        string moduleLabel = type.ToString();
+        moduleName.text = moduleLabel + "\n" + lvlLabel;
+    }
+    
     public void OnDrop(PointerEventData eventData)
     {
         GarageDragOrigin origin = eventData.pointerDrag.GetComponent<GarageDragOrigin>();
@@ -117,5 +143,23 @@ public class GarageDropTarget : MonoBehaviour, IDropHandler
 
         destroyButton.enabled = true;
         destroyButton.gameObject.SetActive(destroyButton.enabled);
+        
+        dropTarget.color = Color.grey;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (eventData.dragging)
+        {
+            dropTarget.color = Color.chartreuse;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (eventData.dragging)
+        {
+            dropTarget.color = Color.grey;
+        }
     }
 }

@@ -3909,7 +3909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScene: MainMenuScene
   garageScene: GarageScene
-  gameScene: GameScene
+  gameScene: MainScene
   transitionDuration: 0.8
   playerLives: 0
   playerCurrency: 0

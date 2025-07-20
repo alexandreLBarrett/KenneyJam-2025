@@ -2118,7 +2118,7 @@ MonoBehaviour:
   playerLives: 0
   playerCurrency: 0
   currentMatch: 0
-  tournamentData: {fileID: 11400000, guid: 7a3646fabd21bda41ace65c02c6f32aa, type: 2}
+  tournamentData: {fileID: 11400000, guid: ac0c46372f295ce4eb94e51b47a651a4, type: 2}
 --- !u!4 &986157035
 Transform:
   m_ObjectHideFlags: 0
@@ -2221,7 +2221,7 @@ Transform:
   m_GameObject: {fileID: 1010826254}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0033569855, y: -0.88194984, z: 0.47132966, w: 0.0012775958}
-  m_LocalPosition: {x: 0, y: 4.731641, z: 2.69}
+  m_LocalPosition: {x: 0, y: 4.731641, z: 2.272}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2802,10 +2802,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2304794749297954525, guid: 931edd491c5746740b743d40a1329003, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2339535869516947254, guid: 931edd491c5746740b743d40a1329003, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2864,7 +2860,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5003941930354530970, guid: 931edd491c5746740b743d40a1329003, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00002193451
+      value: 0.000027527529
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371078716091702098, guid: 931edd491c5746740b743d40a1329003, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371078716091702098, guid: 931edd491c5746740b743d40a1329003, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5371078716091702098, guid: 931edd491c5746740b743d40a1329003, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5635384850003479655, guid: 931edd491c5746740b743d40a1329003, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3016,6 +3024,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8194817848037419821, guid: 931edd491c5746740b743d40a1329003, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8194817848037419821, guid: 931edd491c5746740b743d40a1329003, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
