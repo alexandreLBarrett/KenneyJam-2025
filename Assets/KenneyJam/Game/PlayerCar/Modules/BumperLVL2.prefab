@@ -179,7 +179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   force: 40000
-  damage: 9
+  damage: 7
   cooldown: 2
   bumpSound: {fileID: 8300000, guid: dfe9ff81f2af377419a6658fc52dca44, type: 3}
 --- !u!95 &561166757303790426

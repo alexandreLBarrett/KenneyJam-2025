@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 74562510082522086}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: -1.05}
-  m_LocalScale: {x: 2.6030202, y: 1.7494731, z: 2.056227}
+  m_LocalPosition: {x: 0, y: 0, z: -2.459}
+  m_LocalScale: {x: 2.6030202, y: 4.1257825, z: 2.056227}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1660079015845683201}
@@ -157,11 +157,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 0
   cooldown: 2
-  knockBackScale: 5000
-  damage: 4
+  knockBackScale: 7500
+  damage: 5
   muzzle: {fileID: 3435478047989937824}
   soundEffect: {fileID: 8300000, guid: 640c9979d52a15140a6295a295607dc8, type: 3}
-  VFX: {fileID: 0}
+  VFX: {fileID: 6801353594544354990, guid: 2035261a25466244b90ead7d16c6b4b3, type: 3}
 --- !u!54 &1755052421891139143
 Rigidbody:
   m_ObjectHideFlags: 0

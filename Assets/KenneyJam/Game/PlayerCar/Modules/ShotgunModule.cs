@@ -47,12 +47,22 @@ namespace KenneyJam.Game.PlayerCar.Modules
             
             foreach (var car in collidingCars)
             {
-                Debug.Log("Hit " + car.Key.name);
                 car.Key.InflictDamage(currentController, damage);
 
-                Vector3 knockbackDir = car.Key.gameObject.transform.position - muzzle.gameObject.transform.position;
+                Vector3 knockbackDir = car.Key.gameObject.transform.position - muzzle.transform.position;
                 knockbackDir.Normalize();
                 car.Key.gameObject.GetComponentInParent<Rigidbody>().AddForce(knockbackDir * knockBackScale, ForceMode.Impulse);
+            }
+
+            // Self-knockback
+            var rbs = GetComponentsInParent<Rigidbody>();
+            var thisRB = GetComponentInParent<Rigidbody>();
+            foreach(var rb in rbs)
+            {
+                if (rb != thisRB)
+                {
+                    rb.AddForce(knockBackScale * muzzle.transform.forward, ForceMode.Impulse);
+                }
             }
 
             currentCooldown = cooldown;
