@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9edaa19bd1153b4eafe01cf8bb120c1, type: 3}
-  m_Name: DebugTournamentData
+  m_Script: {fileID: 11500000, guid: ac1cc12be7a74669af55079e19384809, type: 3}
+  m_Name: BotPreset 1
   m_EditorClassIdentifier: 
-  startingCurrency: 10000
-  startingLives: 3
-  matches:
-  - currencyReward: 2
-    playerCount: 2
+  moduleDesc:
+  - moduleSlot: 0
+    type: 1
+    level: 0
+  - moduleSlot: 3
+    type: 0
+    level: 1
+  frame: {fileID: 8066831284391393388, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}

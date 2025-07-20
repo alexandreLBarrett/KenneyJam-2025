@@ -10,6 +10,7 @@ public class FightingGameMode : MonoBehaviour
     public GameObject AIPrefab;
 
     public CarDataPreset[] aiPresets;
+    public CarDataPreset[] bossPresets;
 
     private bool matchEnded = false;
     private int remainingOponents;
@@ -41,7 +42,7 @@ public class FightingGameMode : MonoBehaviour
         if (match.playerCount == 2)
         {
             SpawnPlayer(spawnPoints[0]);
-            SpawnBot(spawnPoints[2]);
+            SpawnBot(spawnPoints[2], true);
         }
         else
         {
@@ -50,7 +51,7 @@ public class FightingGameMode : MonoBehaviour
             SpawnPlayer(spawnPoints[0]);
             for (int i = 1; i < Mathf.Min(match.playerCount, spawnPoints.Length); ++i)
             {
-                SpawnBot(spawnPoints[i]);
+                SpawnBot(spawnPoints[i], false);
                 remainingOponents++;
             }
         }
@@ -81,14 +82,15 @@ public class FightingGameMode : MonoBehaviour
         uiManager.BindToController(controller);
     }
 
-    void SpawnBot(GameObject gameObject)
+    void SpawnBot(GameObject gameObject, bool finalRound)
     {
         GameObject aiCar = Instantiate(AIPrefab);
         aiCar.transform.position = gameObject.transform.position;
         aiCar.transform.rotation = gameObject.transform.rotation;
 
         ModularCar modularCar = aiCar.GetComponentInChildren<ModularCar>();
-        modularCar.preset = aiPresets[Random.Range(0, aiPresets.Length)];
+        CarDataPreset[] presets = finalRound ? bossPresets : aiPresets; 
+        modularCar.preset = presets[Random.Range(0, presets.Length)];
 
         CarController controller = aiCar.GetComponentInChildren<CarController>();
         controller.onCarDeath.AddListener(t =>
