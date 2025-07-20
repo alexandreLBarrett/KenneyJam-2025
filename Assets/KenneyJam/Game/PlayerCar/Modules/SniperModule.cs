@@ -10,6 +10,7 @@ namespace KenneyJam.Game.PlayerCar.Modules
         public float cooldown = 1f;
         public AudioClip sfx;
         public float volume = .2f;
+        public float knockBackScale = 6500f;
 
         public override float Cooldown => cooldown;
 
@@ -37,6 +38,10 @@ namespace KenneyJam.Game.PlayerCar.Modules
                     hit.collider.GetComponentInParent<CarController>().InflictDamage(gameObject.GetComponentInParent<CarController>(), damage);
                 }
             }
+
+            // Self-knockback
+            GetComponentInParent<Rigidbody>().AddForce(knockBackScale * -muzzle.transform.forward, ForceMode.Impulse);
+
             RailgunLaser laser = Instantiate(laserVFXPrefab, muzzleTransform).GetComponent<RailgunLaser>();
             laser.SetupVFXPosition(hit.collider != null ? hit.point : muzzleTransform.position + muzzleTransform.forward * 10.0f);
         }

@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   flipForce: 30000
-  flipDamage: 2
+  flipDamage: 7
   cooldown: 2
   flipSound: {fileID: 8300000, guid: 8e94483850cc9064f9c3cf75d808a561, type: 3}
 --- !u!65 &2540737806767377316
