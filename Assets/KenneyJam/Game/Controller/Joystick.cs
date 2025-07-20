@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TouchPhase = UnityEngine.InputSystem.TouchPhase;
+
 public class Joystick : MonoBehaviour
 {
     public float maxDistanceToOrigin = 1;
@@ -22,27 +24,42 @@ public class Joystick : MonoBehaviour
         Gamepad = GetComponentInParent<Gamepad>();
     }
 
+    private Vector2 GetInputPosition()
+    {
+        if (Touchscreen.current.primaryTouch.phase.ReadValue() != TouchPhase.None)
+        {
+            return Touchscreen.current.primaryTouch.position.ReadValue();
+        }
+        return Mouse.current.position.ReadValue();
+    }
+    
     private void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        bool pressStarted = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Began || Mouse.current.leftButton.wasPressedThisFrame;
+        bool isPressed = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Moved || Mouse.current.leftButton.isPressed;
+        bool pressReleased = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Ended || Mouse.current.leftButton.wasReleasedThisFrame;
+        
+        Debug.Log("dragging " + isDragging + ", started " + pressStarted + ", ongoing " + isPressed + ", stop " + pressReleased);
+        
+        if (pressStarted)
         {
             TryStartDrag();
         }
-        else if (Mouse.current.leftButton.isPressed && isDragging)
+        else if (isPressed && isDragging)
         {
             ContinueDrag();
         }
-        else if (Mouse.current.leftButton.wasReleasedThisFrame && isDragging)
+        else if (pressReleased && isDragging)
         {
             isDragging = false;
             transform.position = initialPosition;
             Gamepad.OnJoystickMoved.Invoke(0, 0);
         }
     }
-
+    
     private void TryStartDrag()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = mainCamera.ScreenPointToRay(GetInputPosition());
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit) && hit.transform == transform)
         {
@@ -59,7 +76,7 @@ public class Joystick : MonoBehaviour
 
     private void ContinueDrag()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = mainCamera.ScreenPointToRay(GetInputPosition());
         float enter;
         if (dragPlane.Raycast(ray, out enter))
         {
