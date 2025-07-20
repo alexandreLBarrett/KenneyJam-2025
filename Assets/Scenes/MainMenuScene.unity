@@ -915,7 +915,7 @@ GameObject:
   - component: {fileID: 417840256}
   - component: {fileID: 417840255}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: New Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2551,7 +2551,7 @@ GameObject:
   - component: {fileID: 1300863574}
   - component: {fileID: 1300863573}
   m_Layer: 5
-  m_Name: Canvas (1)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2641,18 +2641,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300863572}
-  m_LocalRotation: {x: 0, y: -0.82143295, z: 0, w: 0.5703051}
-  m_LocalPosition: {x: 0, y: 0, z: -1.009}
+  m_LocalRotation: {x: 0.07221176, y: -0.8148215, z: 0.10400943, w: 0.56571496}
+  m_LocalPosition: {x: 0, y: 0, z: -1.0089568}
   m_LocalScale: {x: 0.008439244, y: 0.008439244, z: 0.008439244}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 326366814}
   - {fileID: 796053798}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -110.457, z: 0}
+  m_LocalEulerAnglesHint: {x: 14.549, y: -110.457, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -2.057, y: 1.3}
+  m_AnchoredPosition: {x: -2.0568836, y: 1.3008828}
   m_SizeDelta: {x: 307.76, y: 163.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1301112205
