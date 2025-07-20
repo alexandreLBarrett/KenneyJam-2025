@@ -44,6 +44,11 @@ public class CarSceneManager : MonoBehaviour
         playerCurrency = tournamentData.startingCurrency;
     }
 
+    public static void StaticStartGame()
+    {
+        Instance.StartGame();
+    }
+
     public void StartGame()
     {
         Destroy(PersistentCarData.GetPersistentCarData());
