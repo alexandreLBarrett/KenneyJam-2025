@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class CarSceneManager : MonoBehaviour
 {
     public string menuScene = "MainMenuScene";
+    public string defeatScene = "DefeatScene";
     public string garageScene = "GarageScene";
     public string winScene = "VictoryScene";
     public string gameScene = "MainScene";
@@ -69,7 +70,7 @@ public class CarSceneManager : MonoBehaviour
         if (playerLives <= 0)
         {
             SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.GameLost);
-            StartCoroutine(StartLevelTransition(menuScene, 2));
+            StartCoroutine(StartLevelTransition(defeatScene, 2));
         }
         else
         {
@@ -107,6 +108,11 @@ public class CarSceneManager : MonoBehaviour
     public void LoadMainMenu()
     {
         StartCoroutine(StartLevelTransition(menuScene));
+    }
+    
+    public static void LoadMainMenuStatic()
+    {
+        instance.LoadMainMenu();
     }
 
     private void StartCoroutine(IEnumerator c)

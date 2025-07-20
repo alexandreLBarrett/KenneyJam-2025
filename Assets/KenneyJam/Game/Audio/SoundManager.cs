@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
     {
         Instance = this;
         StartMusicLoop();
-
+        
         audioMixer.GetFloat("MusicVolume", out float volume1);
         var g = GameObject.Find("MusicSlider");
         if (g != null)
@@ -73,6 +73,16 @@ public class SoundManager : MonoBehaviour
         {
             musicSource = Instantiate(musicSourceObject, transform);
             musicSource.clip = soundBank.menuMusic;
+            musicSource.volume = musicVolume;
+            musicSource.loop = true;
+            musicSource.Play();
+            return;
+        }
+        
+        if (SceneManager.GetActiveScene().path.Contains("Defeat"))
+        {
+            musicSource = Instantiate(musicSourceObject, transform);
+            musicSource.clip = soundBank.lostMenuMusic;
             musicSource.volume = musicVolume;
             musicSource.loop = true;
             musicSource.Play();

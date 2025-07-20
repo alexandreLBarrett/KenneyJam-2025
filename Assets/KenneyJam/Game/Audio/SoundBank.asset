@@ -20,6 +20,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 57674a89aeafbf246882db71b6c3f059, type: 3}
   - {fileID: 8300000, guid: 10d0010ae3eda044aa3830045205c7a5, type: 3}
   menuMusic: {fileID: 8300000, guid: 11e2c0dcf46dc1747841d485a06359c7, type: 3}
+  lostMenuMusic: {fileID: 8300000, guid: 57674a89aeafbf246882db71b6c3f059, type: 3}
   engineSound: {fileID: 8300000, guid: cabcce76e10f3e64aa1ae572618de67d, type: 3}
   MatchWon: {fileID: 8300000, guid: 708295e3bebbaa445bfbae484d3a960f, type: 3}
   MatchLost: {fileID: 8300000, guid: ef17dc46bce48634fbfdaf31e9659b31, type: 3}
