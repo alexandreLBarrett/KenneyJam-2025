@@ -26,20 +26,36 @@ public class Joystick : MonoBehaviour
 
     private Vector2 GetInputPosition()
     {
-        if (Touchscreen.current.primaryTouch.phase.ReadValue() != TouchPhase.None)
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.phase.ReadValue() != TouchPhase.None)
         {
             return Touchscreen.current.primaryTouch.position.ReadValue();
         }
-        return Mouse.current.position.ReadValue();
+
+        if (Mouse.current != null)
+        {
+            return Mouse.current.position.ReadValue();    
+        }
+
+        return Vector2.zero;
     }
     
     private void Update()
     {
-        bool pressStarted = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Began || Mouse.current.leftButton.wasPressedThisFrame;
-        bool isPressed = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Moved || Mouse.current.leftButton.isPressed;
-        bool pressReleased = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Ended || Mouse.current.leftButton.wasReleasedThisFrame;
-        
-        Debug.Log("dragging " + isDragging + ", started " + pressStarted + ", ongoing " + isPressed + ", stop " + pressReleased);
+        bool pressStarted = false;
+        bool isPressed = false;
+        bool pressReleased = false;
+        if (Touchscreen.current != null)
+        {
+            pressStarted = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Began;
+            isPressed = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Moved;
+            pressReleased = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Ended;
+        }
+        else if (Mouse.current != null)
+        {
+            pressStarted = Mouse.current.leftButton.wasPressedThisFrame;
+            isPressed = Mouse.current.leftButton.isPressed;
+            pressReleased = Mouse.current.leftButton.wasReleasedThisFrame;
+        }
         
         if (pressStarted)
         {
