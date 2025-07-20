@@ -3916,7 +3916,7 @@ MonoBehaviour:
   playerLives: 0
   playerCurrency: 0
   currentMatch: 0
-  tournamentData: {fileID: 11400000, guid: ac0c46372f295ce4eb94e51b47a651a4, type: 2}
+  tournamentData: {fileID: 11400000, guid: 7a3646fabd21bda41ace65c02c6f32aa, type: 2}
 --- !u!4 &2049323041
 Transform:
   m_ObjectHideFlags: 0
