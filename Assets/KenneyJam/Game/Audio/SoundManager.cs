@@ -67,7 +67,9 @@ public class SoundManager : MonoBehaviour
 
     private void StartMusicLoop()
     {
-        if (SceneManager.GetActiveScene().path.Contains("Menu") || SceneManager.GetActiveScene().path.Contains("Garage"))
+        if (SceneManager.GetActiveScene().path.Contains("Menu") 
+            || SceneManager.GetActiveScene().path.Contains("Garage") 
+            || SceneManager.GetActiveScene().path.Contains("Victory"))
         {
             musicSource = Instantiate(musicSourceObject, transform);
             musicSource.clip = soundBank.menuMusic;

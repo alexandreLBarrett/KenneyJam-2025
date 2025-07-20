@@ -17,9 +17,3 @@ MonoBehaviour:
   matches:
   - currencyReward: 2
     playerCount: 4
-  - currencyReward: 4
-    playerCount: 4
-  - currencyReward: 8
-    playerCount: 4
-  - currencyReward: 100000
-    playerCount: 2

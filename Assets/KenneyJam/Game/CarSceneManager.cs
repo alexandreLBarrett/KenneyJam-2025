@@ -9,6 +9,7 @@ public class CarSceneManager : MonoBehaviour
 {
     public string menuScene = "MainMenuScene";
     public string garageScene = "GarageScene";
+    public string winScene = "VictoryScene";
     public string gameScene = "MainScene";
     public float transitionDuration = .8f;
 
@@ -76,17 +77,15 @@ public class CarSceneManager : MonoBehaviour
     {
         playerCurrency += currencyReward;
         currentMatch++;
+        SoundManager.Instance.PlayInstantSound(SoundManager.Instance.soundBank.MatchWon);
         if (currentMatch < tournamentData.matches.Count)
         {
             StartCoroutine(StartLevelTransition(garageScene, 2f));
         }
         else
         {
-            // TODO: trigger the final "You win!" screen (podium or something?)
-
-            // Temp: load the garage and restart at match 0:
             currentMatch = 0;
-            StartCoroutine(StartLevelTransition(garageScene, 2f));
+            StartCoroutine(StartLevelTransition(winScene, 2f));
         }
     }
 
@@ -98,6 +97,11 @@ public class CarSceneManager : MonoBehaviour
     public void LoadGame()
     {
         StartCoroutine(StartLevelTransition(gameScene));
+    }
+    
+    public void LoadMainMenu()
+    {
+        StartCoroutine(StartLevelTransition(menuScene));
     }
 
     private void StartCoroutine(IEnumerator c)
