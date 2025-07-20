@@ -38,13 +38,21 @@ public class FightingGameMode : MonoBehaviour
 
     void StartMatch()
     {
-        Shuffle(spawnPoints);
-
-        SpawnPlayer(spawnPoints[0]);
-        for (int i = 1; i < Mathf.Min(match.playerCount, spawnPoints.Length); ++i)
+        if (match.playerCount == 2)
         {
-            SpawnBot(spawnPoints[i]);
-            remainingOponents++;
+            SpawnPlayer(spawnPoints[0]);
+            SpawnBot(spawnPoints[2]);
+        }
+        else
+        {
+            Shuffle(spawnPoints);
+
+            SpawnPlayer(spawnPoints[0]);
+            for (int i = 1; i < Mathf.Min(match.playerCount, spawnPoints.Length); ++i)
+            {
+                SpawnBot(spawnPoints[i]);
+                remainingOponents++;
+            }
         }
     }
 
