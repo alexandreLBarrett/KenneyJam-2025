@@ -47,7 +47,6 @@ namespace KenneyJam.Game.PlayerCar.Modules
             
             foreach (var car in collidingCars)
             {
-                Debug.Log("Hit " + car.Key.name);
                 car.Key.InflictDamage(currentController, damage);
 
                 Vector3 knockbackDir = car.Key.gameObject.transform.position - muzzle.gameObject.transform.position;
