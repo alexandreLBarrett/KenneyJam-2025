@@ -46,4 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   soundBank: {fileID: 11400000, guid: 5281b7d715c33e443a4a311f37710258, type: 2}
   audioSourceObject: {fileID: 8943424663495420914, guid: 375577673f3e8a04a87dea0990b3b840, type: 3}
-  musicVolume: 0.1
+  musicSourceObject: {fileID: 8943424663495420914, guid: 2f93c0dd9b3abea40b36271e25e59532, type: 3}
+  musicVolume: 0.5
+  audioMixer: {fileID: 0}

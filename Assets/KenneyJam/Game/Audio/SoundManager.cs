@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -11,7 +12,11 @@ public class SoundManager : MonoBehaviour
     [SerializeField]
     private AudioSource audioSourceObject;
     [SerializeField]
+    private AudioSource musicSourceObject;
+    [SerializeField]
     private float musicVolume;
+
+    public AudioMixer audioMixer;
 
     private AudioSource musicSource;
     private List<int> nextMusicIndices = new();
@@ -20,7 +25,22 @@ public class SoundManager : MonoBehaviour
     {
         Instance = this;
         StartMusicLoop();
+
+        audioMixer.GetFloat("MusicVolume", out float volume1);
+        var g = GameObject.Find("MusicSlider");
+        if (g != null)
+            g.GetComponent<Slider>().value = ToDB(volume1);
+        audioMixer.GetFloat("SfxVolume", out float volume2);
+        g = GameObject.Find("SfxSlider");
+        if (g != null)
+            g.GetComponent<Slider>().value = ToDB(volume2);
     }
+
+    //public float ToDB(float v) { return Mathf.Pow(10, v / 20f); }
+    //public float FromDB(float v) { return Mathf.Pow(10, v / 20f); }
+
+    public float ToDB(float v) { return v; }
+    public float FromDB(float v) { return v; }
 
     public static void Shuffle<T>(IList<T> list)
     {
@@ -35,11 +55,21 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public void SetMusicLevel(float level)
+    {
+        audioMixer.SetFloat("MusicVolume", FromDB(level));
+    }
+
+    public void SetSFXLevel(float level)
+    {
+        audioMixer.SetFloat("SfxVolume", FromDB(level));
+    }
+
     private void StartMusicLoop()
     {
         if (SceneManager.GetActiveScene().path.Contains("Menu") || SceneManager.GetActiveScene().path.Contains("Garage"))
         {
-            musicSource = Instantiate(audioSourceObject, transform);
+            musicSource = Instantiate(musicSourceObject, transform);
             musicSource.clip = soundBank.menuMusic;
             musicSource.volume = musicVolume;
             musicSource.loop = true;
@@ -50,7 +80,7 @@ public class SoundManager : MonoBehaviour
         for (int i = 0; i < soundBank.gameMusics.Count; i++)
             nextMusicIndices.Add(i);
         Shuffle(nextMusicIndices);
-        musicSource = Instantiate(audioSourceObject, transform);
+        musicSource = Instantiate(musicSourceObject, transform);
         musicSource.clip = soundBank.gameMusics[nextMusicIndices[0]];
         musicSource.volume = musicVolume;
         musicSource.Play();
