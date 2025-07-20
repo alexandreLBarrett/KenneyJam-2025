@@ -45,7 +45,7 @@ Rigidbody:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_CenterOfMass: {x: 0, y: 3.6, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -60,7 +60,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &8029454921837870855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: 4ae19f4971197614598d82ecc51a73e0, type: 2}
+  currentHealth: 0
   onCarDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -95,6 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3121bff2c2b04ced8994c761a02be7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaults: {fileID: 11400000, guid: e882b0022a762684e92c4e3a7a5421fe, type: 2}
+  preset: {fileID: 0}
   modulesDB: {fileID: 11400000, guid: 8fa63591e3e3c834d8b889255699ad3f, type: 2}
-  carFrame: {fileID: 8066831284391393388, guid: 155fdcd5bc225114e8ea8918b9a30606, type: 3}
+  isPlayer: 0
