@@ -2232,9 +2232,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 9dc3bf116fc2f234d9de2b2e34ac9ec8, type: 2}
+      - m_Target: {fileID: 2049323040}
         m_TargetAssemblyTypeName: CarSceneManager, Assembly-CSharp
-        m_MethodName: LoadGame
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3909,6 +3909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScene: MainMenuScene
   garageScene: GarageScene
+  winScene: VictoryScene
   gameScene: MainScene
   transitionDuration: 0.8
   playerLives: 0
