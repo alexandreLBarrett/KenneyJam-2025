@@ -32,18 +32,19 @@ public class PlayerCarController : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < activateModuleActions.Count; ++i)
-        {
-            if (activateModuleActions[i].triggered)
-            {
-                OnButtonPressed(i);
-            }
-        }
+        //for (int i = 0; i < activateModuleActions.Count; ++i)
+        //{
+        //    if (activateModuleActions[i].triggered)
+        //    {
+        //        OnButtonPressed(i);
+        //    }
+        //}
     }
 
     void FixedUpdate()
     {
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        //Vector2 moveValue = moveAction.ReadValue<Vector2>();
+        Vector2 moveValue = Vector2.zero;
 
         Vector3 flatForward = Camera.main.transform.forward;
         flatForward.y = 0;
