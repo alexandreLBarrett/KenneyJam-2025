@@ -7,6 +7,8 @@ public class SoundBank : ScriptableObject
     public List<AudioClip> gameMusics;
 
     public AudioClip menuMusic;
+    
+    public AudioClip lostMenuMusic;
 
     public AudioClip engineSound;
 
@@ -14,6 +16,7 @@ public class SoundBank : ScriptableObject
     public AudioClip MatchLost;
     public AudioClip GameLost;
     public AudioClip CarBreak;
+    
 
     public List<AudioClip> CarDamageTaken;
 
