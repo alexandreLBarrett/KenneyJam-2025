@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,6 +28,15 @@ public class GarageUIManager : MonoBehaviour
         upgradesButton.onClick.AddListener(() => ChangeMenuSelection(MenuSelected.Upgrades));
         currentMoney = CarSceneManager.Instance.playerCurrency;
         UpdateText();
+        
+        gameObject.GetComponent<Canvas>().enabled = false;
+        StartCoroutine(ShowMenu());
+    }
+
+    private IEnumerator ShowMenu()
+    {
+        yield return new WaitForSeconds(1);
+        gameObject.GetComponent<Canvas>().enabled = true;
     }
 
     // Update is called once per frame
@@ -50,5 +60,11 @@ public class GarageUIManager : MonoBehaviour
     private void UpdateText()
     {
         moneyText.SetText("Money: " + CarSceneManager.Instance.playerCurrency + "$");
+    }
+
+    public void Play()
+    {
+        gameObject.SetActive(false);
+        CarSceneManager.Instance.LoadGame();
     }
 }

@@ -1370,6 +1370,7 @@ MonoBehaviour:
   upgradeButton: {fileID: 5306688652515671657}
   destroyButton: {fileID: 6923721773504891142}
   moduleName: {fileID: 1764629583453225094}
+  dropTarget: {fileID: 0}
 --- !u!1 &1917823556894268010
 GameObject:
   m_ObjectHideFlags: 0
@@ -4376,9 +4377,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 9dc3bf116fc2f234d9de2b2e34ac9ec8, type: 2}
-        m_TargetAssemblyTypeName: CarSceneManager, Assembly-CSharp
-        m_MethodName: LoadGame
+      - m_Target: {fileID: 2138046201946119478}
+        m_TargetAssemblyTypeName: GarageUIManager, Assembly-CSharp
+        m_MethodName: Play
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4830,6 +4831,7 @@ MonoBehaviour:
   upgradeButton: {fileID: 7386161295450324364}
   destroyButton: {fileID: 4730201880159759698}
   moduleName: {fileID: 6320354157100573072}
+  dropTarget: {fileID: 0}
 --- !u!1 &4417106472773566631
 GameObject:
   m_ObjectHideFlags: 0
@@ -5563,6 +5565,7 @@ MonoBehaviour:
   upgradeButton: {fileID: 3419424783386266486}
   destroyButton: {fileID: 1396734013204500787}
   moduleName: {fileID: 3842810422405308016}
+  dropTarget: {fileID: 0}
 --- !u!1 &5170029035238579403
 GameObject:
   m_ObjectHideFlags: 0
@@ -6036,6 +6039,7 @@ MonoBehaviour:
   upgradeButton: {fileID: 907626591504275940}
   destroyButton: {fileID: 3082340993240381288}
   moduleName: {fileID: 1288978703560708621}
+  dropTarget: {fileID: 0}
 --- !u!1 &5587425165629070271
 GameObject:
   m_ObjectHideFlags: 0
@@ -8008,6 +8012,7 @@ MonoBehaviour:
   upgradeButton: {fileID: 8543050886451071511}
   destroyButton: {fileID: 2521638954578052637}
   moduleName: {fileID: 5039838437362066851}
+  dropTarget: {fileID: 0}
 --- !u!1 &8378725408704395569
 GameObject:
   m_ObjectHideFlags: 0

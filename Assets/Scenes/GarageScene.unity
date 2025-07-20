@@ -2113,7 +2113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuScene: MainMenuScene
   garageScene: GarageScene
-  gameScene: GameScene
+  gameScene: MainScene
   transitionDuration: 0.8
   playerLives: 0
   playerCurrency: 0
@@ -2860,7 +2860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5003941930354530970, guid: 931edd491c5746740b743d40a1329003, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000027527529
+      value: -0.000009688367
       objectReference: {fileID: 0}
     - target: {fileID: 5371078716091702098, guid: 931edd491c5746740b743d40a1329003, type: 3}
       propertyPath: m_AnchorMax.x
