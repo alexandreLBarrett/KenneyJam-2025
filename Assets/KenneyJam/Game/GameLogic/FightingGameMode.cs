@@ -38,17 +38,10 @@ public class FightingGameMode : MonoBehaviour
 
     void StartMatch()
     {
-        if (spawnPoints.Length == 0 || spawnPoints.Length > match.playerCount)
-        {
-            Debug.LogWarning("Cannot proceed with match, not enough spawn points.");
-            matchEnded = true;
-            return;
-        }
-
         Shuffle(spawnPoints);
 
         SpawnPlayer(spawnPoints[0]);
-        for (int i = 1; i < match.playerCount; ++i)
+        for (int i = 1; i < Mathf.Min(match.playerCount, spawnPoints.Length); ++i)
         {
             SpawnBot(spawnPoints[i]);
             remainingOponents++;

@@ -7,14 +7,16 @@ public class HPBar : MonoBehaviour
     public GameObject sliderBar;
     public float offset;
     
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         controller = GetComponentInParent<CarController>();
-        controller.onHealthChanged.AddListener((currentHP, maxHP) =>
+        if (sliderBar != null)
         {
-            sliderBar.transform.localScale = new Vector3(Math.Max(currentHP / maxHP, 0), 1, 1);    
-        });
+            controller.onHealthChanged.AddListener((currentHP, maxHP) =>
+            {
+                sliderBar.transform.localScale = new Vector3(Math.Max(currentHP / maxHP, 0), 1, 1);    
+            });
+        }
     }
 
     void Update()
