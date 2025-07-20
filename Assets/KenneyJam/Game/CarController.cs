@@ -16,6 +16,8 @@ public class CarController : MonoBehaviour
     public UnityEvent<float /* damage */, CarController /* damageDealer */, bool /* shouldPlaySound */> onDamageTaken;
     public UnityEvent<float/*health*/, float/*maxHealth*/> onHealthChanged;
 
+    public GameObject explodeVFX;
+
     private AudioSource engineAudioSource;
     private float lerpedEngineVolume = .05f;
     private ModularCar modularCar;
@@ -163,6 +165,7 @@ public class CarController : MonoBehaviour
         onHealthChanged.Invoke(currentHealth, stats.maxHealth);
         if (currentHealth <= 0)
         {
+            Instantiate(explodeVFX, transform);
             onCarDeath.Invoke(transform);
             onCarDeath.RemoveAllListeners();
             onDamageTaken.RemoveAllListeners();
@@ -187,5 +190,6 @@ public class CarController : MonoBehaviour
         euler.x = euler.z = 0;
         panickRotation.eulerAngles = euler;
         panickDuration = .5f;
+        Instantiate(explodeVFX, transform);
     }
 }

@@ -84,6 +84,7 @@ MonoBehaviour:
   onHealthChanged:
     m_PersistentCalls:
       m_Calls: []
+  explodeVFX: {fileID: 6801353594544354990, guid: c86e64a19583bf141915a5b951856adc, type: 3}
 --- !u!114 &3195681891011641113
 MonoBehaviour:
   m_ObjectHideFlags: 0
