@@ -41,26 +41,22 @@ public class Joystick : MonoBehaviour
     
     private void Update()
     {
-        bool pressStarted = false;
+        //bool pressStarted = false;
         bool isPressed = false;
         bool pressReleased = false;
         if (Touchscreen.current != null)
         {
-            pressStarted = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Began;
             isPressed = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Moved;
             pressReleased = Touchscreen.current.primaryTouch.phase.ReadValue() == TouchPhase.Ended;
         }
         
         if (Mouse.current != null)
         {
-            pressStarted = Mouse.current.leftButton.wasPressedThisFrame;
-            isPressed = Mouse.current.leftButton.isPressed;
-            pressReleased = Mouse.current.leftButton.wasReleasedThisFrame;
+            isPressed = isPressed || Mouse.current.leftButton.isPressed;
+            pressReleased = pressReleased || Mouse.current.leftButton.wasReleasedThisFrame;
         }
         
-        //Debug.Log(isDragging + " " + pressStarted + " " + isPressed + " " + pressReleased);
-        
-        if (pressStarted)
+        if (!isDragging && isPressed)
         {
             TryStartDrag();
         }
