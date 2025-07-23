@@ -56,7 +56,7 @@ public class CarSceneManager : MonoBehaviour
         currentMatch = 0;
         playerLives = tournamentData.startingLives;
         playerCurrency = tournamentData.startingCurrency;
-        LoadGame();
+        LoadGarage();
     }
 
     public TournamentData.Match GetCurrentMatch()
